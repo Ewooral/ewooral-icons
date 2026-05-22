@@ -5,7 +5,7 @@
 # Build context is the repo root (NOT site/) because the prebuild copy
 # script needs to read ../src/styles/icons.css.
 
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 
 # Enable pnpm via corepack.
