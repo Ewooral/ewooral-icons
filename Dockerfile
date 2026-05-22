@@ -18,7 +18,7 @@ RUN corepack enable
 # is rebuilt continuously and shouldn't block on lockfile freshness.
 COPY site/package.json site/pnpm-lock.yaml ./site/
 WORKDIR /app/site
-RUN pnpm install --frozen-lockfile --config.minimumReleaseAge=0
+RUN pnpm install --frozen-lockfile --config.minimumReleaseAge=0 --ignore-scripts
 
 # Now copy the source needed for the build — the site itself plus the
 # package's SVGs and CSS (which the docs site dogfoods).
