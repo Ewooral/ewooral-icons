@@ -11,14 +11,12 @@ WORKDIR /app
 # Enable pnpm via corepack.
 RUN corepack enable
 
-# Install site deps first (cache-friendly: only re-runs when the lockfile
-# changes, not when SVGs change). We pass --config.minimumReleaseAge=0
-# inline because pnpm 11's default 24h supply-chain policy rejects any
-# dep published in the last day — fine for prod apps, but the docs site
-# is rebuilt continuously and shouldn't block on lockfile freshness.
+# Install site deps. packageManager: "pnpm@10.x" in site/package.json
+# pins us to pnpm 10 (avoids pnpm 11's strict supply-chain + ignored-
+# builds policies which fight a continuously-rebuilt docs site).
 COPY site/package.json site/pnpm-lock.yaml ./site/
 WORKDIR /app/site
-RUN pnpm install --frozen-lockfile --config.minimumReleaseAge=0 --ignore-scripts
+RUN pnpm install --frozen-lockfile
 
 # Now copy the source needed for the build — the site itself plus the
 # package's SVGs and CSS (which the docs site dogfoods).

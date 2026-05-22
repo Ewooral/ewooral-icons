@@ -4,6 +4,7 @@
   "private": true,
   "description": "Docs + playground for @ewooral/icons — hosted at icons.ewooral.com",
   "type": "module",
+  "packageManager": "pnpm@10.14.0",
   "scripts": {
     "sync:css": "cp ../src/styles/icons.css ./_icons-css.css",
     "predev": "pnpm sync:css",
