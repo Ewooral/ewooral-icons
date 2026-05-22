@@ -1,0 +1,349 @@
+/*
+  @ewooral/icons — hover animation classes
+  ----------------------------------------
+  Every icon sits on a 24×24 viewBox with a 2px safe margin (so the
+  drawable area is 20×20). The icon plays a bouncy reaction whenever it
+  matches one of two triggers:
+
+    (a) :hover                  — automatic, zero-JS, default behaviour
+    (b) [data-play]             — set by any event handler (click, focus,
+                                  on-mount, IntersectionObserver, ref.play()…)
+
+  Setting data-play="1" on the <svg class="ew-icon"> element forces the
+  animation to play once. The React component, the vanilla trigger helper,
+  and the Flutter port all share this contract: "to play an animation,
+  toggle data-play on, listen for animationend, toggle off."
+
+  An icon can OPT OUT of the default hover trigger by setting
+  data-trigger="<anything-but-hover>" — the CSS then ignores :hover so
+  the only way to play is through data-play. This keeps hover from
+  doubling up with click/focus/etc. when a JS framework owns the events.
+
+  KEYFRAME COMPRESSION
+  --------------------
+  Every keyframe does its real motion in the first 35% of the cycle and
+  holds at the start state for the remaining 65%. This gives a visible
+  REST period between iterations (when motion="repeat" or motion={N}),
+  because CSS animation has no native "interval between iterations" knob.
+  Increasing `--ew-dur` (the Speed control) stretches BOTH the motion
+  and the rest proportionally — slower speed = longer pause.
+
+  Importing
+  ---------
+    import "@ewooral/icons/styles/icons.css";
+
+  The SVG MUST be inlined (not loaded as <img>) for the animations to
+  trigger, since the keyframes target classes inside the document.
+*/
+
+:where(.ew-icon) {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+:where(.ew-icon) * {
+  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity   0.4s ease;
+  animation-iteration-count: var(--ew-iter, 1);
+}
+
+/* ─── Dual-trigger selector aliases ────────────────────────────────────
+   `--ew-on` is a "selector helper" — every rule below uses both
+   `:where(.ew-icon):where(:not([data-trigger]):hover, [data-play])`  +
+   the inner-class selector. Rather than repeating that mouthful, we
+   inline the logic per rule. Mental model:
+
+       "Icon is playing"  =  (hovered AND no explicit trigger override)
+                          OR (data-play attribute is set)
+*/
+
+/* ─── Motion primitives — all compressed to 35% active / 65% rest ──── */
+
+/* SPARK — gold petal pop */
+@keyframes ew-spark {
+  0%   { transform: scale(1)   rotate(0);    opacity: 1; }
+  12%  { transform: scale(1.6) rotate(45deg); opacity: 1; }
+  24%  { transform: scale(0.85) rotate(8deg); opacity: 1; }
+  35%  { transform: scale(1)   rotate(0);    opacity: 1; }
+  100% { transform: scale(1)   rotate(0);    opacity: 1; }
+}
+:where(.ew-icon):not([data-trigger]):hover .ew-spark,
+:where(.ew-icon[data-play]) .ew-spark {
+  animation: ew-spark 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* SNIP — scissors blades close */
+@keyframes ew-snip-a {
+  0%   { transform: rotate(0); }
+  14%  { transform: rotate(-22deg); }
+  24%  { transform: rotate(4deg); }
+  35%  { transform: rotate(0); }
+  100% { transform: rotate(0); }
+}
+@keyframes ew-snip-b {
+  0%   { transform: rotate(0); }
+  14%  { transform: rotate(22deg); }
+  24%  { transform: rotate(-4deg); }
+  35%  { transform: rotate(0); }
+  100% { transform: rotate(0); }
+}
+:where(.ew-icon):not([data-trigger]):hover .ew-blade-a,
+:where(.ew-icon[data-play]) .ew-blade-a { animation: ew-snip-a 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+:where(.ew-icon):not([data-trigger]):hover .ew-blade-b,
+:where(.ew-icon[data-play]) .ew-blade-b { animation: ew-snip-b 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+/* TILT — whole icon wobbles */
+@keyframes ew-tilt {
+  0%   { transform: rotate(0); }
+  9%   { transform: rotate(-12deg); }
+  19%  { transform: rotate(8deg); }
+  28%  { transform: rotate(-3deg); }
+  35%  { transform: rotate(0); }
+  100% { transform: rotate(0); }
+}
+:where(.ew-icon[data-motion="tilt"]):not([data-trigger]):hover > g,
+:where(.ew-icon[data-motion="tilt"][data-play]) > g {
+  animation: ew-tilt 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-box: fill-box; transform-origin: center;
+}
+
+/* SHAKE — quick left-right */
+@keyframes ew-shake {
+  0%,35% { transform: rotate(0); }
+  5%   { transform: rotate(-8deg); }
+  11%  { transform: rotate(8deg); }
+  16%  { transform: rotate(-6deg); }
+  21%  { transform: rotate(4deg); }
+  28%  { transform: rotate(-2deg); }
+  100% { transform: rotate(0); }
+}
+:where(.ew-icon[data-motion="shake"]):not([data-trigger]):hover .ew-body,
+:where(.ew-icon[data-motion="shake"][data-play]) .ew-body {
+  animation: ew-shake 0.7s ease-in-out;
+  transform-box: fill-box; transform-origin: 50% 12%;
+}
+
+/* RISE — element slides up then settles */
+@keyframes ew-rise {
+  0%   { transform: translateY(0); }
+  16%  { transform: translateY(-4px); }
+  26%  { transform: translateY(1px); }
+  35%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+:where(.ew-icon):not([data-trigger]):hover .ew-rise,
+:where(.ew-icon[data-play]) .ew-rise {
+  animation: ew-rise 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* SWING — pendulum tilt */
+@keyframes ew-swing {
+  0%   { transform: rotate(0); }
+  11%  { transform: rotate(-14deg); }
+  21%  { transform: rotate(10deg); }
+  30%  { transform: rotate(-4deg); }
+  35%  { transform: rotate(0); }
+  100% { transform: rotate(0); }
+}
+:where(.ew-icon[data-motion="swing"]):not([data-trigger]):hover .ew-body,
+:where(.ew-icon[data-motion="swing"][data-play]) .ew-body {
+  animation: ew-swing 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-box: fill-box; transform-origin: 50% 10%;
+}
+
+/* POP — quick scale-up + settle */
+@keyframes ew-pop {
+  0%   { transform: scale(1); }
+  14%  { transform: scale(1.25); }
+  24%  { transform: scale(0.92); }
+  35%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+:where(.ew-icon[data-motion="pop"]):not([data-trigger]):hover > g,
+:where(.ew-icon[data-motion="pop"][data-play]) > g {
+  animation: ew-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-box: fill-box; transform-origin: center;
+}
+
+/* SPIN — full rotation then rest */
+@keyframes ew-spin {
+  0%   { transform: rotate(0); }
+  35%  { transform: rotate(360deg); }
+  100% { transform: rotate(360deg); }
+}
+:where(.ew-icon[data-motion="spin"]):not([data-trigger]):hover > g,
+:where(.ew-icon[data-motion="spin"][data-play]) > g {
+  animation: ew-spin 0.75s cubic-bezier(0.5, 0, 0.5, 1);
+  transform-box: fill-box; transform-origin: center;
+}
+
+/* SLIDE-X / SLIDE-Y — arrow shoots in a direction */
+@keyframes ew-slide-x {
+  0%   { transform: translateX(0); }
+  16%  { transform: translateX(4px); }
+  35%  { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}
+@keyframes ew-slide-y {
+  0%   { transform: translateY(0); }
+  16%  { transform: translateY(-4px); }
+  35%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+:where(.ew-icon[data-motion="slide-r"]):not([data-trigger]):hover .ew-body,
+:where(.ew-icon[data-motion="slide-r"][data-play]) .ew-body { animation: ew-slide-x 0.55s cubic-bezier(0.34, 1.56, 0.64, 1); }
+:where(.ew-icon[data-motion="slide-l"]):not([data-trigger]):hover .ew-body,
+:where(.ew-icon[data-motion="slide-l"][data-play]) .ew-body { animation: ew-slide-x 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) reverse; }
+:where(.ew-icon[data-motion="slide-u"]):not([data-trigger]):hover .ew-body,
+:where(.ew-icon[data-motion="slide-u"][data-play]) .ew-body { animation: ew-slide-y 0.55s cubic-bezier(0.34, 1.56, 0.64, 1); }
+:where(.ew-icon[data-motion="slide-d"]):not([data-trigger]):hover .ew-body,
+:where(.ew-icon[data-motion="slide-d"][data-play]) .ew-body { animation: ew-slide-y 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) reverse; }
+
+/* DRAW — stroke fills in then rests */
+@keyframes ew-draw {
+  0%   { stroke-dashoffset: var(--ew-len, 60); }
+  35%  { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 0; }
+}
+:where(.ew-icon):not([data-trigger]):hover .ew-draw,
+:where(.ew-icon[data-play]) .ew-draw {
+  stroke-dasharray: var(--ew-len, 60);
+  animation: ew-draw 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* PULSE — gentle scale on the spark/accent */
+@keyframes ew-pulse {
+  0%,35% { transform: scale(1); }
+  18%    { transform: scale(1.25); }
+  100%   { transform: scale(1); }
+}
+:where(.ew-icon[data-motion="pulse"]):not([data-trigger]):hover .ew-spark,
+:where(.ew-icon[data-motion="pulse"][data-play]) .ew-spark {
+  animation: ew-pulse 0.6s ease-in-out;
+  transform-box: fill-box; transform-origin: center;
+}
+
+/* FLIP — vertical card flip */
+@keyframes ew-flip {
+  0%   { transform: rotateY(0); }
+  18%  { transform: rotateY(180deg); }
+  35%  { transform: rotateY(360deg); }
+  100% { transform: rotateY(360deg); }
+}
+:where(.ew-icon[data-motion="flip"]):not([data-trigger]):hover > g,
+:where(.ew-icon[data-motion="flip"][data-play]) > g {
+  animation: ew-flip 0.7s ease-in-out;
+  transform-box: fill-box; transform-origin: center;
+}
+
+/* CHECK — checkmark draws on, then a tiny bounce */
+@keyframes ew-check {
+  0%   { stroke-dashoffset: 24; transform: scale(1); }
+  21%  { stroke-dashoffset: 0;  transform: scale(1); }
+  28%  { transform: scale(1.15); }
+  35%  { transform: scale(1); }
+  100% { stroke-dashoffset: 0;  transform: scale(1); }
+}
+:where(.ew-icon):not([data-trigger]):hover .ew-check,
+:where(.ew-icon[data-play]) .ew-check {
+  stroke-dasharray: 24;
+  animation: ew-check 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  transform-box: fill-box; transform-origin: center;
+}
+
+/* ─── SPLASH — cartoonish particle burst from the gold petal-ribbon ─── */
+/*
+   Five particles sit on top of the spark at (19.6, 5.5). At rest they
+   are invisible. When the icon plays, each is given a unique outward
+   trajectory + pop-grow-shoot-fade. Trajectories fan into the
+   upper-right quadrant so the burst reads as "outward, away from the
+   disc centre" — like a sparkle pop.
+*/
+:where(.ew-icon) .ew-splash > circle {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes ew-splash-1 {
+  0%   { transform: translate(0px, 0px)   scale(0);   opacity: 0; }
+  10%  { transform: translate(1px, -1px)  scale(1.6); opacity: 1; }
+  35%  { transform: translate(8px, -10px) scale(0.4); opacity: 0; }
+  100% { transform: translate(8px, -10px) scale(0.4); opacity: 0; }
+}
+@keyframes ew-splash-2 {
+  0%   { transform: translate(0px, 0px)   scale(0);   opacity: 0; }
+  10%  { transform: translate(1px, -0.4px) scale(1.5); opacity: 1; }
+  35%  { transform: translate(11px, -3px) scale(0.4); opacity: 0; }
+  100% { transform: translate(11px, -3px) scale(0.4); opacity: 0; }
+}
+@keyframes ew-splash-3 {
+  0%   { transform: translate(0px, 0px)   scale(0);   opacity: 0; }
+  10%  { transform: translate(0.3px, -1px) scale(1.4); opacity: 1; }
+  35%  { transform: translate(2px, -12px) scale(0.4); opacity: 0; }
+  100% { transform: translate(2px, -12px) scale(0.4); opacity: 0; }
+}
+@keyframes ew-splash-4 {
+  0%   { transform: translate(0px, 0px)    scale(0);   opacity: 0; }
+  10%  { transform: translate(1.4px, 0.5px) scale(1.6); opacity: 1; }
+  35%  { transform: translate(12px, 3px)   scale(0.4); opacity: 0; }
+  100% { transform: translate(12px, 3px)   scale(0.4); opacity: 0; }
+}
+@keyframes ew-splash-5 {
+  0%   { transform: translate(0px, 0px)    scale(0);   opacity: 0; }
+  10%  { transform: translate(-0.6px, -1px) scale(1.4); opacity: 1; }
+  35%  { transform: translate(-5px, -10px) scale(0.4); opacity: 0; }
+  100% { transform: translate(-5px, -10px) scale(0.4); opacity: 0; }
+}
+
+:where(.ew-icon):not([data-trigger]):hover .ew-p1,
+:where(.ew-icon[data-play]) .ew-p1 { animation: ew-splash-1 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); }
+:where(.ew-icon):not([data-trigger]):hover .ew-p2,
+:where(.ew-icon[data-play]) .ew-p2 { animation: ew-splash-2 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); }
+:where(.ew-icon):not([data-trigger]):hover .ew-p3,
+:where(.ew-icon[data-play]) .ew-p3 { animation: ew-splash-3 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); }
+:where(.ew-icon):not([data-trigger]):hover .ew-p4,
+:where(.ew-icon[data-play]) .ew-p4 { animation: ew-splash-4 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); }
+:where(.ew-icon):not([data-trigger]):hover .ew-p5,
+:where(.ew-icon[data-play]) .ew-p5 { animation: ew-splash-5 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); }
+
+/* ─── Runtime knobs — read from CSS variables on the icon or ancestor ── */
+/*
+   These overrides MUST come AFTER every play rule above + use !important
+   because each `animation: name dur ease` shorthand silently resets these
+   sub-properties. Variables:
+     --ew-iter   → iteration count   (number | "infinite")
+     --ew-dur    → cycle duration    (CSS time, e.g. "0.7s")
+     --ew-delay  → delay before start (CSS time)
+*/
+:where(.ew-icon):not([data-trigger]):hover *,
+:where(.ew-icon[data-play]) * {
+  animation-iteration-count: var(--ew-iter, 1) !important;
+  animation-duration: var(--ew-dur, 0.7s) !important;
+  animation-delay: var(--ew-delay, 0s) !important;
+}
+
+/* Hard off-switch */
+:where(.ew-icon[data-motion-off]) *,
+:where(.ew-icon[data-motion-off]):hover *,
+:where(.ew-icon[data-motion-off][data-play]) *,
+[data-motion-off] :where(.ew-icon) *,
+[data-motion-off] :where(.ew-icon):hover *,
+[data-motion-off] :where(.ew-icon[data-play]) * {
+  animation: none !important;
+}
+
+/* Reduce motion — respect users who've asked to dial it down */
+@media (prefers-reduced-motion: reduce) {
+  :where(.ew-icon) *,
+  :where(.ew-icon):hover *,
+  :where(.ew-icon[data-play]) * {
+    animation: none !important;
+    transition: opacity 0.2s ease;
+  }
+}

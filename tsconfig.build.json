@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "dist/react",
+    "declaration": true,
+    "declarationMap": true,
+    "rootDir": "dist/.tmp-tsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler"
+  },
+  "include": ["dist/.tmp-tsx"],
+  "exclude": ["playground", "scripts", "src/svg"]
+}

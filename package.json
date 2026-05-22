@@ -1,0 +1,74 @@
+{
+  "name": "@ewooral/icons",
+  "version": "0.1.0",
+  "description": "Ewooral & BFAM Holdings — distinctive medallion-style icon set with cartoonish hover splash. 56 icons (growing). React + vanilla helper for any framework. Configurable trigger (hover/click/focus/mount/viewport/manual).",
+  "license": "MIT",
+  "author": "Ewooral & BFAM Holdings <hello@ewooral.com>",
+  "homepage": "https://icons.ewooral.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ewooral/ewooral-icons.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ewooral/ewooral-icons/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "sideEffects": ["**/*.css"],
+  "files": [
+    "dist",
+    "svg",
+    "styles",
+    "react",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    },
+    "./styles/icons.css": "./dist/styles/icons.css",
+    "./vanilla/ew-icons-trigger.js": "./dist/vanilla/ew-icons-trigger.js",
+    "./svg/*": "./dist/svg/*",
+    "./png/*": "./dist/png/*",
+    "./sprite.svg": "./dist/sprite.svg",
+    "./manifest.json": "./dist/manifest.json"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/generate.mjs && tsc -p tsconfig.build.json",
+    "build:react": "node scripts/generate.mjs",
+    "build:png": "node scripts/generate-png.mjs",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.2.4",
+    "@vitejs/plugin-react": "^5.0.5",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sharp": "^0.34.5",
+    "typescript": "^5.7.2",
+    "vite": "^7.1.16"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true }
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "react",
+    "ewooral",
+    "ahofe",
+    "bfam"
+  ]
+}
