@@ -1,0 +1,30 @@
+{
+  "name": "@ewooral/icons-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Docs + playground for @ewooral/icons — hosted at icons.ewooral.com",
+  "type": "module",
+  "scripts": {
+    "sync:css": "cp ../src/styles/icons.css ./_icons-css.css",
+    "predev": "pnpm sync:css",
+    "prebuild": "pnpm sync:css",
+    "dev": "next dev --turbopack -p 3010",
+    "build": "next build",
+    "start": "next start -p 3010",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^16.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.2.4",
+    "@types/react-dom": "^19.2.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.2"
+  }
+}

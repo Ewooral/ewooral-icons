@@ -3,3 +3,9 @@ dist
 .DS_Store
 *.log
 .env*
+site/_icons-css.css
+site/node_modules
+site/.next
+site/out
+site/*.tsbuildinfo
+site/next-env.d.ts

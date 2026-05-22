@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* The package's own icons.css is imported from app/layout.tsx as a JS
+   side-effect import — Next handles cross-folder resolution there in a
+   way @import does not. */
+
+@theme {
+  /* Ewooral brand palette */
+  --color-bg:           #0e1e16;
+  --color-bg-2:         #142a1e;
+  --color-bg-3:         #1a3a2a;
+  --color-line:         rgba(245, 241, 232, 0.08);
+  --color-line-strong:  rgba(245, 241, 232, 0.16);
+  --color-ink:          #f5f1e8;
+  --color-ink-dim:      #a8a39a;
+  --color-ink-faint:    #6b6760;
+  --color-accent:       #f5b820;
+  --color-accent-warm:  #f5e6a8;
+  --color-sage:         #8fb89a;
+  --color-rose:         #e8a3a3;
+
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-serif:   "Instrument Serif", Georgia, serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+}
+
+html, body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
+}
+
+::selection { background: var(--color-accent); color: var(--color-bg); }
+
+/* Reusable surface chip */
+.edge-card {
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+.edge-card:hover {
+  border-color: var(--color-line-strong);
+}
+
+.label-cap {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+/* Wider pulse for the hero — slow drift */
+@keyframes hero-drift {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
