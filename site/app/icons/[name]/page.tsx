@@ -7,16 +7,19 @@ export function generateStaticParams() {
   return loadIcons().map((i) => ({ name: i.name }));
 }
 
-export function generateMetadata({ params }: { params: { name: string } }) {
-  const icon = loadIcon(params.name);
+// Next.js 16: `params` is async. Must be awaited before reading.
+export async function generateMetadata({ params }: { params: Promise<{ name: string }> }) {
+  const { name } = await params;
+  const icon = loadIcon(name);
   return {
     title: icon ? `${icon.displayName}` : "Icon not found",
     description: icon ? `${icon.displayName} — ${icon.motion ?? "static"} motion. Inspect, copy, and customise this icon.` : undefined,
   };
 }
 
-export default function Page({ params }: { params: { name: string } }) {
-  const icon = loadIcon(params.name);
+export default async function Page({ params }: { params: Promise<{ name: string }> }) {
+  const { name } = await params;
+  const icon = loadIcon(name);
   if (!icon) notFound();
 
   // Index of all icons for prev/next nav

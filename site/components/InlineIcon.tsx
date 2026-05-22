@@ -37,37 +37,61 @@ export function InlineIcon(p: InlineIconProps) {
 
   const hostRef = useRef<HTMLSpanElement | null>(null);
 
-  // Programmatic "Play" — bump playTick to dispatch ew-play on the icon.
+  // Inline the play logic — set data-play, force reflow, schedule auto-
+  // clear so the next call re-triggers from frame 0. The vanilla helper
+  // does the same thing for non-React consumers; React needs its own
+  // copy because the helper isn't loaded in the docs site bundle.
+  const fire = (el: SVGElement) => {
+    if (el.hasAttribute("data-motion-off")) return;
+    el.removeAttribute("data-play");
+    void el.getBoundingClientRect(); // force reflow
+    el.setAttribute("data-play", "");
+    const cs = getComputedStyle(el);
+    const iter = (cs.getPropertyValue("--ew-iter") || "1").trim();
+    if (iter === "infinite") return;
+    const dur = parseTime(cs.getPropertyValue("--ew-dur"), 700);
+    const dly = parseTime(cs.getPropertyValue("--ew-delay"), 0);
+    const total = dur * (parseInt(iter, 10) || 1) + dly + 60;
+    const timer = window.setTimeout(() => {
+      el.removeAttribute("data-play");
+    }, total);
+    (el as unknown as { __ewTimer?: number }).__ewTimer && window.clearTimeout((el as unknown as { __ewTimer: number }).__ewTimer);
+    (el as unknown as { __ewTimer?: number }).__ewTimer = timer;
+  };
+
+  // Programmatic "Play" — bump playTick to fire the icon's animation.
   useEffect(() => {
     if (!p.playTick || p.playTick === 0) return;
-    hostRef.current?.querySelector(".ew-icon")?.dispatchEvent(new CustomEvent("ew-play"));
+    const el = hostRef.current?.querySelector<SVGElement>(".ew-icon");
+    if (el) fire(el);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [p.playTick]);
 
-  // mount + viewport + click + focus triggers need the vanilla helper.
+  // mount + viewport + click + focus triggers — same play logic.
   useEffect(() => {
     if (trigger === "hover" || trigger === "manual") return;
     const el = hostRef.current?.querySelector<SVGElement>(".ew-icon");
     if (!el) return;
 
-    const fire = () => el.dispatchEvent(new CustomEvent("ew-play"));
+    const play = () => fire(el);
 
     if (trigger === "mount") {
-      requestAnimationFrame(fire);
+      requestAnimationFrame(play);
       return;
     }
     if (trigger === "click") {
-      el.addEventListener("click", fire);
-      return () => el.removeEventListener("click", fire);
+      el.addEventListener("click", play);
+      return () => el.removeEventListener("click", play);
     }
     if (trigger === "focus") {
       if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "0");
-      el.addEventListener("focus", fire);
-      return () => el.removeEventListener("focus", fire);
+      el.addEventListener("focus", play);
+      return () => el.removeEventListener("focus", play);
     }
     if (trigger === "viewport") {
-      if (typeof IntersectionObserver === "undefined") { fire(); return; }
+      if (typeof IntersectionObserver === "undefined") { play(); return; }
       const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => { if (e.isIntersecting) fire(); });
+        entries.forEach((e) => { if (e.isIntersecting) play(); });
       }, { threshold: 0.4 });
       io.observe(el);
       return () => io.disconnect();
@@ -94,6 +118,15 @@ export function InlineIcon(p: InlineIconProps) {
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
+}
+
+// Parse a CSS time string ("0.7s" / "500ms") to milliseconds.
+function parseTime(v: string | undefined, fallback: number): number {
+  if (!v) return fallback;
+  const m = v.trim().match(/^([\d.]+)(ms|s)$/);
+  if (!m) return fallback;
+  const n = parseFloat(m[1]);
+  return m[2] === "ms" ? n : n * 1000;
 }
 
 // Depth-counting strip — needed because chrome contains the nested splash group.
