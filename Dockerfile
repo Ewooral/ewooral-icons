@@ -12,11 +12,13 @@ WORKDIR /app
 RUN corepack enable
 
 # Install site deps first (cache-friendly: only re-runs when the lockfile
-# changes, not when SVGs change). .npmrc must come along so the
-# minimum-release-age policy is disabled for this build.
-COPY site/package.json site/pnpm-lock.yaml site/.npmrc ./site/
+# changes, not when SVGs change). We pass --config.minimumReleaseAge=0
+# inline because pnpm 11's default 24h supply-chain policy rejects any
+# dep published in the last day — fine for prod apps, but the docs site
+# is rebuilt continuously and shouldn't block on lockfile freshness.
+COPY site/package.json site/pnpm-lock.yaml ./site/
 WORKDIR /app/site
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --config.minimumReleaseAge=0
 
 # Now copy the source needed for the build — the site itself plus the
 # package's SVGs and CSS (which the docs site dogfoods).
