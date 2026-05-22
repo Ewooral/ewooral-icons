@@ -9,6 +9,6 @@
     "module": "ESNext",
     "moduleResolution": "Bundler"
   },
-  "include": ["dist/.tmp-tsx"],
-  "exclude": ["playground", "scripts", "src/svg"]
+  "include": ["dist/.tmp-tsx/**/*.ts", "dist/.tmp-tsx/**/*.tsx"],
+  "exclude": ["playground", "scripts", "src/svg", "node_modules", "site"]
 }

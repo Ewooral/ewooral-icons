@@ -2,8 +2,8 @@ export const metadata = { title: "Roadmap" };
 
 const ITEMS = [
   { v: "v0.1", status: "done", title: "56 medallion icons + trigger system + vanilla helper", date: "May 2026" },
-  { v: "v0.2", status: "next", title: "icons.ewooral.com docs site live, npm publish", date: "May 2026" },
-  { v: "v0.3", status: "next", title: "@ewooral/icons/flutter — Dart widgets for ahofe-mobile", date: "Jun 2026" },
+  { v: "v0.2", status: "done", title: "icons.ewooral.com live · @ewooral/icons on npm · ewooral_icons on pub.dev", date: "May 2026" },
+  { v: "v0.3", status: "next", title: "ahofe-mobile pilot swap-out (~20 icons) + GH Actions auto-publish on tag", date: "Jun 2026" },
   { v: "v0.4", status: "soon", title: "80+ icons (commerce, social, charts, salon-domain expansion)", date: "Jul 2026" },
   { v: "v0.5", status: "soon", title: "Domain packs — clinic, fitness, tutoring (other BFAM products)", date: "Q3 2026" },
   { v: "v0.6", status: "soon", title: "Animated GIFs / Lottie alternates for marketing use", date: "Q3 2026" },

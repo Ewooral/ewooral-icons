@@ -19,6 +19,9 @@ export function Footer() {
           <a href="https://www.npmjs.com/package/@ewooral/icons" target="_blank" rel="noreferrer" className="hover:text-[var(--color-ink)]">
             npm
           </a>
+          <a href="https://pub.dev/packages/ewooral_icons" target="_blank" rel="noreferrer" className="hover:text-[var(--color-ink)]">
+            pub.dev
+          </a>
           <a href="/roadmap" className="hover:text-[var(--color-ink)]">Roadmap</a>
           <a href="/docs/contributing" className="hover:text-[var(--color-ink)]">Contribute</a>
         </div>
