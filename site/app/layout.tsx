@@ -3,6 +3,14 @@ import "./globals.css";
 import "../_icons-css.css";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { ThemeProvider } from "../lib/theme";
+
+/* Inline before-hydration script — paints the user's chosen theme on the
+   very first frame so the page doesn't flash default→stored on every load. */
+const THEME_BOOTSTRAP = `
+(function(){try{var t=localStorage.getItem("ewooral_icons_theme");
+if(t==="light"||t==="dark"||t==="default"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();
+`;
 
 export const metadata: Metadata = {
   title: {
@@ -24,10 +32,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP }} />
+      </head>
       <body className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

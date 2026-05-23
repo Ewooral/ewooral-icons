@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemeSwitch } from "./ThemeSwitch";
 
 const NAV = [
   { href: "/icons",      label: "Browse" },
@@ -28,6 +29,9 @@ export function Header() {
               {n.label}
             </Link>
           ))}
+          <div className="ml-2">
+            <ThemeSwitch />
+          </div>
           <a
             href="https://github.com/Ewooral/ewooral-icons"
             target="_blank"

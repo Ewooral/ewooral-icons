@@ -4,46 +4,158 @@
    side-effect import — Next handles cross-folder resolution there in a
    way @import does not. */
 
+/* ============================================================
+   Ewooral & BFAM — Design tokens
+   Mirrors the company standard from ahofe-app so any Ewooral
+   product feels like the same brand. Token names are identical;
+   only the surface set is trimmed (no notifications / calendar
+   palettes here — the icons site doesn't use them).
+   ============================================================ */
 @theme {
-  /* Ewooral brand palette */
-  --color-bg:           #0e1e16;
+  /* Default = dark-green company theme */
+  --color-bg:           #1a3a2a;
   --color-bg-2:         #142a1e;
-  --color-bg-3:         #1a3a2a;
-  --color-line:         rgba(245, 241, 232, 0.08);
-  --color-line-strong:  rgba(245, 241, 232, 0.16);
+  --color-bg-3:         #0f2017;
   --color-ink:          #f5f1e8;
   --color-ink-dim:      #a8a39a;
   --color-ink-faint:    #6b6760;
   --color-accent:       #f5b820;
+  --color-accent-deep:  #d99500;
   --color-accent-warm:  #f5e6a8;
-  --color-sage:         #8fb89a;
   --color-rose:         #e8a3a3;
+  --color-sage:         #8fb89a;
+  --color-link:         #7eb8e0;
+
+  --color-line:         rgba(245, 241, 232, 0.08);
+  --color-line-2:       rgba(245, 241, 232, 0.14);
+  --color-line-strong:  rgba(245, 241, 232, 0.16);
+  --color-overlay:      rgba(15, 32, 23, 0.85);
 
   --font-display: "Bricolage Grotesque", system-ui, sans-serif;
   --font-serif:   "Instrument Serif", Georgia, serif;
   --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+  --font-sans:    "Bricolage Grotesque", system-ui, sans-serif;
+
+  /* Sharp corners — brand directive: no rounded corners > 4px */
+  --radius-sm: 2px;
+  --radius-DEFAULT: 2px;
+  --radius-md: 4px;
+
+  --animate-fade-up: ew-fade-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-fade:    ew-fade 0.4s ease both;
+  --animate-shimmer: ew-shimmer 1.6s ease-in-out infinite;
 }
 
+/* ============================================================
+   Keyframes (page-level — icon keyframes live in icons.css)
+   ============================================================ */
+@keyframes ew-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ew-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes ew-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+/* Hero drift — slow vertical breathing on the homepage hero. */
+@keyframes hero-drift {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+/* color-scheme tells the browser to render native form controls + scrollbars
+   in the matching scheme. Default theme is dark-green so it stays "dark". */
+:root, [data-theme="default"] { color-scheme: dark; }
+
+/* ============================================================
+   Light theme — gold + green on warm cream backgrounds.
+   ============================================================ */
+[data-theme="light"] {
+  color-scheme: light;
+  --color-bg:           #ffffff;
+  --color-bg-2:         #f7f7f5;
+  --color-bg-3:         #eeede9;
+  --color-ink:          #1c1c1a;
+  --color-ink-dim:      #5a5a56;
+  --color-ink-faint:    #8a8a84;
+  --color-accent:       #d99500;
+  --color-accent-deep:  #b87a00;
+  --color-accent-warm:  #f5d97a;
+  --color-rose:         #c0413a;
+  --color-sage:         #2a7a4a;
+  --color-link:         #1c5db8;
+
+  --color-line:         rgba(28, 28, 26, 0.10);
+  --color-line-2:       rgba(28, 28, 26, 0.18);
+  --color-line-strong:  rgba(28, 28, 26, 0.22);
+  --color-overlay:      rgba(28, 28, 26, 0.50);
+}
+
+/* ============================================================
+   Dark theme — near-black with gold, green, and white accents.
+   ============================================================ */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg:           #0e0e0e;
+  --color-bg-2:         #171717;
+  --color-bg-3:         #1f1f1f;
+  --color-ink:          #f0f0f0;
+  --color-ink-dim:      #a0a0a0;
+  --color-ink-faint:    #636363;
+  --color-accent:       #f5b820;
+  --color-accent-deep:  #d99500;
+  --color-accent-warm:  #f5e6a8;
+  --color-rose:         #f07070;
+  --color-sage:         #5cb87a;
+  --color-link:         #7eb8e0;
+
+  --color-line:         rgba(255, 255, 255, 0.07);
+  --color-line-2:       rgba(255, 255, 255, 0.13);
+  --color-line-strong:  rgba(255, 255, 255, 0.18);
+  --color-overlay:      rgba(0, 0, 0, 0.80);
+}
+
+/* Smooth transition between themes */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================================
+   Base — html/body, selection, scrollbar
+   ============================================================ */
 html, body {
   background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-display);
   -webkit-font-smoothing: antialiased;
-  color-scheme: dark;
 }
 
 ::selection { background: var(--color-accent); color: var(--color-bg); }
 
-/* Reusable surface chip */
-.edge-card {
-  border: 1px solid var(--color-line);
-  border-radius: 6px;
-  transition: border-color 180ms ease, transform 180ms ease;
-}
-.edge-card:hover {
-  border-color: var(--color-line-strong);
+::-webkit-scrollbar        { width: 8px; height: 8px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--color-line-2); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent-deep); }
+
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(26, 58, 42, 0.25); }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: var(--color-accent-deep); }
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: var(--color-accent-deep); }
+
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
+/* ============================================================
+   Component utilities — matches ahofe-app vocabulary
+   ============================================================ */
 .label-cap {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -52,8 +164,87 @@ html, body {
   color: var(--color-ink-faint);
 }
 
-/* Wider pulse for the hero — slow drift */
-@keyframes hero-drift {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
+/* Card with hover lift */
+.edge-card {
+  border: 1px solid var(--color-line);
+  border-radius: 2px;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.edge-card:hover {
+  border-color: var(--color-line-strong);
+}
+
+/* Hairline gold rule — section divider */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-accent) 20%, var(--color-accent) 80%, transparent);
+  opacity: 0.4;
+}
+
+/* Gold button with shimmer */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-weight: 600;
+  transition: transform 0.15s ease;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.btn-gold:hover { transform: translateY(-1px); }
+.btn-gold:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+.btn-gold::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%);
+  background-size: 200% 100%;
+  background-position: -200% 0;
+  transition: background-position 0.7s ease;
+  pointer-events: none;
+}
+.btn-gold:hover::after { background-position: 200% 0; }
+
+/* Form inputs */
+.field-base {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--color-line-2);
+  color: var(--color-ink);
+  padding: 14px 16px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  border-radius: 2px;
+}
+.field-base:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  background: rgba(245, 184, 32, 0.04);
+}
+.field-base::placeholder { color: var(--color-ink-faint); }
+
+/* ============================================================
+   Theme-aware icon defaults (site-local opt-in)
+   ------------------------------------------------------------
+   The published @ewooral/icons CSS keeps hardcoded brand gold as
+   the fallback so 3rd-party consumers get predictable rendering.
+   On our own docs site we route the brand tokens INTO the icons
+   so they respect default / light / dark themes automatically.
+   ============================================================ */
+.ew-icon {
+  --ew-accent:     var(--color-accent);
+  --ew-bg:         var(--color-ink);
+  --ew-bg-opacity: 0.07;
+}
+[data-theme="light"] .ew-icon { --ew-bg-opacity: 0.06; }
+[data-theme="dark"]  .ew-icon { --ew-bg-opacity: 0.10; }
+
+/* Skeleton loader */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-line) 0%, var(--color-line-2) 50%, var(--color-line) 100%);
+  background-size: 200% 100%;
+  animation: ew-shimmer 1.6s ease-in-out infinite;
 }
