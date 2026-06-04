@@ -36,7 +36,7 @@ const files = readdirSync(SVG_DIR).filter((f) => f.endsWith(".svg"));
 // The EW prefix is the brand signature in import statements — every
 // Ewooral icon visibly starts with EW in source code.
 const toPascal = (s) =>
-  "EW" + s.replace(/(^|-)([a-z])/g, (_, __, c) => c.toUpperCase());
+  "EW" + s.replace(/(^|-)([a-z0-9])/g, (_, __, c) => c.toUpperCase());
 
 const manifest = [];
 
