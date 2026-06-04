@@ -66,7 +66,16 @@ for (const file of files) {
   //   PLAIN    = glyph only (medallion chrome stripped)
   const innerFull = inner;
   const innerNoPetal = inner.replace(/<(circle|rect|path)[^>]*class="ew-spark"[^>]*\/>/g, "");
-  const innerPlain = inner.replace(/<g[^>]*class="ew-chrome"[^>]*>[\s\S]*?<\/g>/g, "");
+  // Plain mode: strip the chrome AND scale the glyph 1.5x so it actually fills
+  // the icon box (without chrome the glyph would only fill ~50% of the viewBox).
+  // Scale 1.5 centered on (12, 12) keeps coords within 0..24 for glyphs in the
+  // -6..6 design grid (3..21 effective).
+  const innerPlain = inner
+    .replace(/<g[^>]*class="ew-chrome"[^>]*>[\s\S]*?<\/g>/g, "")
+    .replace(
+      /<g class="ew-body" transform="translate\(12 12(?:\.\d+)?\)">/,
+      '<g class="ew-body" transform="translate(12 12) scale(1.5)">',
+    );
 
   const tsx = `"use client";
 import * as React from "react";
