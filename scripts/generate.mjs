@@ -66,31 +66,7 @@ for (const file of files) {
   //   PLAIN    = glyph only (medallion chrome stripped)
   const innerFull = inner;
   const innerNoPetal = inner.replace(/<(circle|rect|path)[^>]*class="ew-spark"[^>]*\/>/g, "");
-  // Plain mode: strip the chrome, scale the glyph 1.8x so it actually fills
-  // the icon box, and swap the baked-in brand greens for currentColor so the
-  // glyph inherits the surrounding text colour (adapts per theme — invisible
-  // against the default-theme forest-green bg otherwise). Sage stays for the
-  // two-tone visual identity; gold accent (var(--ew-accent)) stays for the
-  // brand spark.
-  const innerPlain = inner
-    .replace(/<g[^>]*class="ew-chrome"[^>]*>[\s\S]*?<\/g>/g, "")
-    .replace(
-      /<g class="ew-body" transform="translate\(12 12(?:\.\d+)?\)">/,
-      '<g class="ew-body" transform="translate(12 12) scale(1.8)">',
-    )
-    // Structural (primary/highlight) colours → currentColor so the glyph
-    // inherits the surrounding text colour and adapts to every theme.
-    // Greens (#1a3a2a, #0f2017, #142a1e) are the dark primary fills/outlines
-    // — invisible on the default-theme forest-green bg otherwise.
-    // Creams (#f5f1e8, #fff3cf) are the light highlights — invisible on
-    // the light theme white bg otherwise.
-    // Sage #8fb89a stays for the two-tone effect; gold var(--ew-accent) and
-    // rose stay for brand pops.
-    .replace(/(fill|stroke)="#1a3a2a"/g, '$1="currentColor"')
-    .replace(/(fill|stroke)="#0f2017"/g, '$1="currentColor"')
-    .replace(/(fill|stroke)="#142a1e"/g, '$1="currentColor"')
-    .replace(/(fill|stroke)="#f5f1e8"/g, '$1="currentColor"')
-    .replace(/(fill|stroke)="#fff3cf"/g, '$1="currentColor"');
+  const innerPlain = inner.replace(/<g[^>]*class="ew-chrome"[^>]*>[\s\S]*?<\/g>/g, "");
 
   const tsx = `"use client";
 import * as React from "react";
