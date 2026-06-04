@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ewooral Icons — Pluggable Motion Engine Demo</title>
+    <style>
+      /* Company theme tokens (from the header 'Company' theme). */
+      :root {
+        --color-bg: #1a3a2a;
+        --color-bg-2: #142a1e;
+        --color-bg-3: #0f2017;
+        --color-accent: #f5b820;
+        --color-accent-deep: #d99500;
+        --color-ink: #f5f1e8;
+        --color-ink-dim: #a8a39a;
+        --color-sage: #8fb89a;
+        --ew-accent: var(--color-accent);
+        --ew-bg: var(--color-ink);
+        --ew-dur: 600ms;
+        --ew-iter: 1;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font: 15px/1.5 ui-sans-serif, system-ui, sans-serif;
+        background: var(--color-bg);
+        color: var(--color-ink);
+        padding: 32px;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 4px;
+      }
+      p.lede {
+        color: var(--color-sage);
+        margin: 0 0 28px;
+        max-width: 60ch;
+      }
+      .grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      .card {
+        background: var(--color-bg-2);
+        border: 1px solid var(--color-bg-3);
+        border-radius: 14px;
+        padding: 22px;
+        text-align: center;
+      }
+      .card h2 {
+        font-size: 15px;
+        margin: 0 0 2px;
+        letter-spacing: 0.02em;
+      }
+      .card .tag {
+        font-size: 12px;
+        color: var(--color-ink-dim);
+        margin-bottom: 16px;
+      }
+      .stage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 96px;
+      }
+      .ew-icon {
+        width: 72px;
+        height: 72px;
+        cursor: pointer;
+      }
+      .controls {
+        margin-top: 16px;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+      }
+      button {
+        background: var(--color-accent);
+        color: var(--color-bg-3);
+        border: 0;
+        border-radius: 8px;
+        padding: 7px 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button.ghost {
+        background: transparent;
+        color: var(--color-ink);
+        border: 1px solid var(--color-bg-3);
+      }
+      .global {
+        margin: 0 0 24px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      select {
+        background: var(--color-bg-2);
+        color: var(--color-ink);
+        border: 1px solid var(--color-bg-3);
+        border-radius: 8px;
+        padding: 6px 10px;
+      }
+      pre {
+        text-align: left;
+        background: var(--color-bg-3);
+        color: var(--color-ink);
+        border-radius: 10px;
+        padding: 14px;
+        overflow: auto;
+        font-size: 12.5px;
+        margin-top: 28px;
+      }
+      code .k {
+        color: var(--color-accent);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Pluggable motion engine</h1>
+    <p class="lede">
+      The exact same icon markup, animated three different ways. Pick the engine
+      per-icon with <code>data-engine</code>, or set a default for a whole
+      subtree with <code>data-ew-engine</code>. CSS is the zero-dependency
+      default; GSAP and Motion are loaded lazily only when used.
+    </p>
+
+    <div class="global">
+      <label for="def">App-wide default engine:</label>
+      <select id="def">
+        <option value="css">css (default, 0 deps)</option>
+        <option value="gsap">gsap</option>
+        <option value="motion">motion</option>
+      </select>
+      <span class="tag">applied via &lt;body data-ew-engine&gt;</span>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>CSS engine</h2>
+        <div class="tag">data-engine="css"</div>
+        <div class="stage"><span data-slot="css"></span></div>
+        <div class="controls">
+          <button data-play="css">Play</button>
+          <button class="ghost" data-stop="css">Stop</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>GSAP engine</h2>
+        <div class="tag">data-engine="gsap" (lazy)</div>
+        <div class="stage"><span data-slot="gsap"></span></div>
+        <div class="controls">
+          <button data-play="gsap">Play</button>
+          <button class="ghost" data-stop="gsap">Stop</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Motion engine</h2>
+        <div class="tag">data-engine="motion" (lazy)</div>
+        <div class="stage"><span data-slot="motion"></span></div>
+        <div class="controls">
+          <button data-play="motion">Play</button>
+          <button class="ghost" data-stop="motion">Stop</button>
+        </div>
+      </div>
+    </div>
+
+    <pre><code>&lt;!-- Vanilla: just declare the engine on the icon --&gt;
+&lt;svg class="ew-icon" data-motion="pop" <span class="k">data-engine="gsap"</span>&gt;…&lt;/svg&gt;
+
+&lt;!-- Or default a whole region; per-icon data-engine still wins --&gt;
+&lt;section <span class="k">data-ew-engine="motion"</span>&gt; …icons here… &lt;/section&gt;
+
+// React
+import { EwIcon } from '@ewooral/icons/react';
+&lt;EwIcon name="star" <span class="k">engine="gsap"</span> trigger="hover" /&gt;</code></pre>
+
+    <!-- The reference-faithful star medallion, in COMPANY colors. -->
+    <template id="glyph">
+      <svg
+        class="ew-icon"
+        viewBox="0 0 24 24"
+        data-motion="pop"
+        data-trigger="manual"
+      >
+        <circle
+          class="ew-disc"
+          cx="12"
+          cy="12"
+          r="10.4"
+          fill="var(--ew-bg)"
+          stroke="var(--color-bg-3)"
+          stroke-width="1.2"
+        />
+        <circle
+          cx="12"
+          cy="12"
+          r="8.8"
+          fill="none"
+          stroke="var(--color-bg-3)"
+          stroke-width=".7"
+          stroke-dasharray="0.4 1.8"
+          stroke-linecap="round"
+        />
+        <g class="ew-body">
+          <path
+            d="M12 6.2 13.7 9.9 17.7 10.4 14.7 13.2 15.5 17.1 12 15.1 8.5 17.1 9.3 13.2 6.3 10.4 10.3 9.9Z"
+            fill="var(--ew-accent)"
+            stroke="var(--color-bg-3)"
+            stroke-width="1.1"
+            stroke-linejoin="round"
+          />
+        </g>
+        <circle
+          class="ew-spark"
+          cx="18.2"
+          cy="6.4"
+          r="1.5"
+          fill="var(--color-sage)"
+          opacity="0"
+        />
+      </svg>
+    </template>
+
+    <link rel="stylesheet" href="../src/styles/icons.css" />
+    <script type="module">
+      import * as engine from '../src/engines/index.js';
+      var tpl = document.getElementById('glyph');
+      var ENGINES = ['css', 'gsap', 'motion'];
+      ENGINES.forEach(function (name) {
+        var slot = document.querySelector('[data-slot="' + name + '"]');
+        var svg = tpl.content.firstElementChild.cloneNode(true);
+        svg.setAttribute('data-engine', name);
+        slot.appendChild(svg);
+        svg.addEventListener('mouseenter', function () {
+          engine.play(svg);
+        });
+        svg.addEventListener('mouseleave', function () {
+          engine.stop(svg);
+        });
+      });
+      document.querySelectorAll('[data-play]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          engine.play(
+            document.querySelector(
+              '[data-slot="' + b.dataset.play + '"] .ew-icon'
+            )
+          );
+        });
+      });
+      document.querySelectorAll('[data-stop]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          engine.stop(
+            document.querySelector(
+              '[data-slot="' + b.dataset.stop + '"] .ew-icon'
+            )
+          );
+        });
+      });
+      // App-wide default switch -> set scope attr + warm the engine.
+      document.getElementById('def').addEventListener('change', function (e) {
+        document.body.setAttribute('data-ew-engine', e.target.value);
+        engine.setDefaultEngine(e.target.value);
+        engine.preloadEngine(e.target.value);
+      });
+    </script>
+  </body>
+</html>
