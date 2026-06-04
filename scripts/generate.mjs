@@ -68,7 +68,8 @@ for (const file of files) {
   const innerNoPetal = inner.replace(/<(circle|rect|path)[^>]*class="ew-spark"[^>]*\/>/g, "");
   const innerPlain = inner.replace(/<g[^>]*class="ew-chrome"[^>]*>[\s\S]*?<\/g>/g, "");
 
-  const tsx = `import * as React from "react";
+  const tsx = `"use client";
+import * as React from "react";
 
 export type EWMotion = "play" | "repeat" | "off" | number;
 
