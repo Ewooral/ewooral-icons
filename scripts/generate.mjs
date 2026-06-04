@@ -74,7 +74,7 @@ for (const file of files) {
     .replace(/<g[^>]*class="ew-chrome"[^>]*>[\s\S]*?<\/g>/g, "")
     .replace(
       /<g class="ew-body" transform="translate\(12 12(?:\.\d+)?\)">/,
-      '<g class="ew-body" transform="translate(12 12) scale(1.5)">',
+      '<g class="ew-body" transform="translate(12 12) scale(1.8)">',
     );
 
   const tsx = `"use client";
