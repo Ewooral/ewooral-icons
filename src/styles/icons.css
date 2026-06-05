@@ -44,9 +44,31 @@
   flex-shrink: 0;
 }
 
+/* Anchor .ew-body via the CSS independent `translate` property instead of
+   the SVG `transform="translate(12 12.4)"` attribute (which is REMOVED
+   from every icon's source by the build). When CSS keyframes set
+   `transform: rotate(...)` / `scale(...)` on .ew-body, the SVG transform
+   attribute would have been overridden by the CSS value — making the body
+   snap to (0,0) on hover. CSS `translate` is a separate property that
+   composes with `transform`, so the base anchor is always preserved.
+   `transform-box: view-box` keeps the units consistent even when animation
+   rules below set `transform-box: view-box` for rotation centering, which
+   would otherwise re-interpret the translate against the element's local
+   geometry box and visibly drift the glyph. */
+/* The body is wrapped in an outer `<g class="ew-body-anchor">` group that
+   carries the `transform="translate(12 12.4)"` SVG attribute. CSS animations
+   apply to the inner .ew-body so they don't conflict with the anchor. */
+
+
+
 :where(.ew-icon) * {
-  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
-              opacity   0.4s ease;
+  /* `transition: transform` here was causing a brief snap-to-(0,0) on hover
+     of any descendant with an SVG transform attribute or CSS translate —
+     the transition would interpolate from the inherited identity matrix
+     into the keyframe's first transform value, briefly cancelling the
+     anchor. Keep opacity transitions for cross-fades; let animations drive
+     transforms directly without interpolation. */
+  transition: opacity 0.4s ease;
   animation-iteration-count: var(--ew-iter, 1);
 }
 
@@ -73,7 +95,7 @@
 :where(.ew-icon):not([data-trigger]):hover .ew-spark,
 :where(.ew-icon[data-play]) .ew-spark {
   animation: ew-spark 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform-box: fill-box;
+  transform-box: view-box;
   transform-origin: center;
 }
 
@@ -106,10 +128,10 @@
   35%  { transform: rotate(0); }
   100% { transform: rotate(0); }
 }
-:where(.ew-icon[data-motion="tilt"]):not([data-trigger]):hover > g,
-:where(.ew-icon[data-motion="tilt"][data-play]) > g {
+:where(.ew-icon[data-motion="tilt"]):not([data-trigger]):hover > g.ew-chrome,
+:where(.ew-icon[data-motion="tilt"][data-play]) > g.ew-chrome {
   animation: ew-tilt 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform-box: fill-box; transform-origin: center;
+  transform-box: view-box; transform-origin: center;
 }
 
 /* SHAKE — quick left-right */
@@ -125,7 +147,7 @@
 :where(.ew-icon[data-motion="shake"]):not([data-trigger]):hover .ew-body,
 :where(.ew-icon[data-motion="shake"][data-play]) .ew-body {
   animation: ew-shake 0.7s ease-in-out;
-  transform-box: fill-box; transform-origin: 50% 12%;
+  transform-box: view-box; transform-origin: 50% 12%;
 }
 
 /* RISE — element slides up then settles */
@@ -153,7 +175,7 @@
 :where(.ew-icon[data-motion="swing"]):not([data-trigger]):hover .ew-body,
 :where(.ew-icon[data-motion="swing"][data-play]) .ew-body {
   animation: ew-swing 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform-box: fill-box; transform-origin: 50% 10%;
+  transform-box: view-box; transform-origin: 50% 10%;
 }
 
 /* POP — quick scale-up + settle */
@@ -164,10 +186,10 @@
   35%  { transform: scale(1); }
   100% { transform: scale(1); }
 }
-:where(.ew-icon[data-motion="pop"]):not([data-trigger]):hover > g,
-:where(.ew-icon[data-motion="pop"][data-play]) > g {
+:where(.ew-icon[data-motion="pop"]):not([data-trigger]):hover > g.ew-chrome,
+:where(.ew-icon[data-motion="pop"][data-play]) > g.ew-chrome {
   animation: ew-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform-box: fill-box; transform-origin: center;
+  transform-box: view-box; transform-origin: center;
 }
 
 /* SPIN — full rotation then rest */
@@ -176,10 +198,10 @@
   35%  { transform: rotate(360deg); }
   100% { transform: rotate(360deg); }
 }
-:where(.ew-icon[data-motion="spin"]):not([data-trigger]):hover > g,
-:where(.ew-icon[data-motion="spin"][data-play]) > g {
+:where(.ew-icon[data-motion="spin"]):not([data-trigger]):hover > g.ew-chrome,
+:where(.ew-icon[data-motion="spin"][data-play]) > g.ew-chrome {
   animation: ew-spin 0.75s cubic-bezier(0.5, 0, 0.5, 1);
-  transform-box: fill-box; transform-origin: center;
+  transform-box: view-box; transform-origin: center;
 }
 
 /* SLIDE-X / SLIDE-Y — arrow shoots in a direction */
@@ -225,7 +247,7 @@
 :where(.ew-icon[data-motion="pulse"]):not([data-trigger]):hover .ew-spark,
 :where(.ew-icon[data-motion="pulse"][data-play]) .ew-spark {
   animation: ew-pulse 0.6s ease-in-out;
-  transform-box: fill-box; transform-origin: center;
+  transform-box: view-box; transform-origin: center;
 }
 
 /* FLIP — vertical card flip */
@@ -235,10 +257,10 @@
   35%  { transform: rotateY(360deg); }
   100% { transform: rotateY(360deg); }
 }
-:where(.ew-icon[data-motion="flip"]):not([data-trigger]):hover > g,
-:where(.ew-icon[data-motion="flip"][data-play]) > g {
+:where(.ew-icon[data-motion="flip"]):not([data-trigger]):hover > g.ew-chrome,
+:where(.ew-icon[data-motion="flip"][data-play]) > g.ew-chrome {
   animation: ew-flip 0.7s ease-in-out;
-  transform-box: fill-box; transform-origin: center;
+  transform-box: view-box; transform-origin: center;
 }
 
 /* CHECK — checkmark draws on, then a tiny bounce */
@@ -253,7 +275,7 @@
 :where(.ew-icon[data-play]) .ew-check {
   stroke-dasharray: 24;
   animation: ew-check 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
-  transform-box: fill-box; transform-origin: center;
+  transform-box: view-box; transform-origin: center;
 }
 
 /* ─── SPLASH — cartoonish particle burst from the gold petal-ribbon ─── */
@@ -266,7 +288,7 @@
 */
 :where(.ew-icon) .ew-splash > circle {
   opacity: 0;
-  transform-box: fill-box;
+  transform-box: view-box;
   transform-origin: center;
 }
 
