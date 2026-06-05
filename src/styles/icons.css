@@ -99,6 +99,21 @@
   transform-origin: center;
 }
 
+/* PETAL DRAW — signature mark outline draws itself on, then fades.
+ * Path ships with stroke-dashoffset:100 (pathLength normalised) so the
+ * stroke is hidden at rest. The keyframe sweeps offset to 0 (draw in)
+ * then fades the stroke-opacity to 0 (leave the gold fill on its own).
+ * fill stays untouched so the petal is visible at rest. */
+@keyframes ew-petal-draw {
+  0%   { stroke-dashoffset: 100; stroke-opacity: 1; }
+  45%  { stroke-dashoffset: 0;   stroke-opacity: 1; }
+  100% { stroke-dashoffset: 0;   stroke-opacity: 0; }
+}
+:where(.ew-icon):not([data-trigger]):hover .ew-petal-draw,
+:where(.ew-icon[data-play]) .ew-petal-draw {
+  animation: ew-petal-draw 0.9s ease-out forwards;
+}
+
 /* SNIP — scissors blades close */
 @keyframes ew-snip-a {
   0%   { transform: rotate(0); }

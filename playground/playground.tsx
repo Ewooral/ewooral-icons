@@ -200,7 +200,10 @@ const SIGNATURE_INNER: Record<string, string> = {
   // Nkonsonkonson (DEFAULT) — two interlocked chain links. "Linked together."
   nkonsonkonson: `<ellipse cx="18.8" cy="5.0" rx="0.75" ry="1.35" fill="none" stroke="var(--ew-signature,#f5b820)" stroke-width="0.55" transform="rotate(-25 18.8 5.0)"/><ellipse cx="20.3" cy="6.4" rx="0.75" ry="1.35" fill="none" stroke="var(--ew-signature,#f5b820)" stroke-width="0.55" transform="rotate(25 20.3 6.4)"/>`,
   // Original gold petal — legacy, kept as an option for backwards-compat.
-  petal: `<path class="ew-spark" fill="var(--ew-signature,#f5b820)" d="M18.5 3.4 C 20.4 3.4 21.6 4.8 21.4 6.6 C 21.2 7.4 20.4 7.7 19.4 7.5 C 18.4 7.2 17.6 6.4 17.6 5.4 C 17.6 4.4 18 3.8 18.5 3.4 Z"/>`,
+  // pathLength="100" + dasharray/offset wire the draw-stroke animation
+  // (`ew-petal-draw` keyframe). Stroke is the highlight cream so the
+  // outline reads clearly against the gold fill regardless of palette.
+  petal: `<path class="ew-spark ew-petal-draw" fill="var(--ew-signature,#f5b820)" stroke="var(--ew-highlight,#f5f1e8)" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" d="M18.5 3.4 C 20.4 3.4 21.6 4.8 21.4 6.6 C 21.2 7.4 20.4 7.7 19.4 7.5 C 18.4 7.2 17.6 6.4 17.6 5.4 C 17.6 4.4 18 3.8 18.5 3.4 Z"/>`,
 };
 
 const ENGINES = ["css", "gsap", "motion"];
