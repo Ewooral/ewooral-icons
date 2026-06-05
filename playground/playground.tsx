@@ -243,6 +243,67 @@ const ICON_ARCHETYPES: Record<string, Archetype> = {
   // Continuous loader: GSAP spin loops linearly + ember petals lick upward
   // from the signature like a kettle just about to boil.
   loader:    { motion: "spin", engine: "gsap", ember: true, repeat: "-1", repeatDelay: "0", speed: "1.1s" },
+
+  // ─── Fintech kit ─────────────────────────────────────────────────
+  // Each icon picks the motion that reads as its real-world action.
+  // We compose from existing motions (pop, swing, tilt, shake, rise,
+  // pulse, spin, flip, check, lid-open, tick) plus ember on the
+  // payment-success-y icons so they feel celebratory.
+
+  // Money / wallet
+  dollar:        { motion: "pop",   engine: "gsap", ember: true },           // coin lands, sparkles
+  coins:         { motion: "swing", engine: "css" },                          // stack clink
+  wallet:        { motion: "lid-open", engine: "gsap" },                      // flap opens
+  card:          { motion: "flip",  engine: "css" },                          // card flips
+  receipt:       { motion: "rise",  engine: "css" },                          // print roll
+  coupon:        { motion: "tilt",  engine: "css" },                          // coupon flap
+
+  // Money flow / transactions
+  send:          { motion: "tilt",  engine: "css" },                          // paper plane
+  download:      { motion: "rise",  engine: "css" },                          // settle in
+  upload:        { motion: "rise",  engine: "css" },                          // lift off
+  refresh:       { motion: "spin",  engine: "gsap", repeat: "-1", repeatDelay: "0", speed: "1.1s" },
+  "refresh-cw":  { motion: "spin",  engine: "gsap", repeat: "-1", repeatDelay: "0", speed: "1.1s" },
+  sync:          { motion: "spin",  engine: "gsap", repeat: "-1", repeatDelay: "0", speed: "1.1s" },
+
+  // Charts / analytics
+  chart:         { motion: "rise",  engine: "css" },                          // bars grow
+  "pie-chart":   { motion: "spin",  engine: "css" },                          // wedge sweep
+  "trending-up": { motion: "rise",  engine: "css" },
+  "trending-down": { motion: "rise", engine: "css" },                         // path renders the dip
+  dashboard:     { motion: "pop",   engine: "css" },
+
+  // Security
+  lock:          { motion: "tilt",  engine: "css" },                          // shackle nudge
+  unlock:        { motion: "tilt",  engine: "css" },
+  key:           { motion: "tilt",  engine: "css" },                          // turn
+  shield:        { motion: "pulse", engine: "css" },
+  "shield-check": { motion: "pulse", engine: "css" },
+  fingerprint:   { motion: "pulse", engine: "css" },                          // scan beat
+  verified:      { motion: "check", engine: "css" },                          // checkmark draw
+
+  // Status / confirmation
+  check:         { motion: "check", engine: "css" },
+  "check-circle":{ motion: "check", engine: "css" },
+  "check-check": { motion: "check", engine: "css" },
+  close:         { motion: "shake", engine: "css" },                          // rejection wobble
+  "x-circle":    { motion: "shake", engine: "css" },
+  "info-circle": { motion: "pulse", engine: "css" },
+  "help-circle": { motion: "tilt",  engine: "css" },
+  alert:         { motion: "shake", engine: "css" },                          // (already authored)
+  "alert-circle":{ motion: "shake", engine: "css" },
+
+  // Notifications
+  bell:          { motion: "swing", engine: "css" },                          // (already authored)
+  "bell-off":    { motion: "tilt",  engine: "css" },
+  notification:  { motion: "pulse", engine: "css" },
+
+  // Time / scheduling
+  timer:         { motion: "tick",  engine: "gsap", repeat: "-1", repeatDelay: "0" },
+  alarm:         { motion: "swing", engine: "css" },                          // bell-style ring
+  hourglass:     { motion: "flip",  engine: "css" },                          // sand pours
+  history:       { motion: "spin",  engine: "gsap", repeat: "1" },            // clockwise sweep
+
   // Future entries (each will get its own implementation pass):
   // scissors:  { motion: "cut",   engine: "gsap" },
   // bell:      { motion: "ring",  engine: "gsap" },
