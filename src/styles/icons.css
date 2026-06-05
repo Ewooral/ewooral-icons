@@ -241,22 +241,6 @@
   transform-box: fill-box; transform-origin: center;
 }
 
-/* BLINK — eyelid closing + opening. Vertical squeeze of the glyph body so an
-   eye-like icon reads as if a top + bottom lid swept over it. Pairs naturally
-   with EWEye / EWEyeOff. Apply via data-motion="blink"; for continuous
-   blinking pass motion="repeat" (or motion={N}) so animation-iteration-count
-   picks up the var(--ew-iter) the component sets. */
-@keyframes ew-blink {
-  0%, 100% { transform: scaleY(1); }
-  42%      { transform: scaleY(0.08); }
-  58%      { transform: scaleY(0.08); }
-}
-:where(.ew-icon[data-motion="blink"]):not([data-trigger]):hover .ew-body,
-:where(.ew-icon[data-motion="blink"][data-play]) .ew-body {
-  animation: ew-blink 0.6s ease-in-out;
-  transform-box: fill-box; transform-origin: center;
-}
-
 /* CHECK — checkmark draws on, then a tiny bounce */
 @keyframes ew-check {
   0%   { stroke-dashoffset: 24; transform: scale(1); }

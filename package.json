@@ -1,6 +1,6 @@
 {
   "name": "@ewooral/icons",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Ewooral & BFAM Holdings — distinctive medallion-style icon set with cartoonish hover splash. 234 icons. Pluggable motion engines (CSS, GSAP, Motion). React + vanilla helper for any framework. Configurable trigger (hover/click/focus/mount/viewport/manual).",
   "license": "MIT",
   "author": "Ewooral & BFAM Holdings <hello@ewooral.com>",
