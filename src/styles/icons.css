@@ -44,6 +44,56 @@
   flex-shrink: 0;
 }
 
+/* ─────────────────────────────────────────────────────────────────────
+ *  Theme-aware --ew-* defaults
+ *  ----------------------------
+ *  Each shipped SVG declares `var(--ew-glyph, #1a3a2a)` (and friends)
+ *  so without an override they fall back to brand-forest. That looks
+ *  right on a cream page but disappears on a true-black or true-white
+ *  bg. These blocks set sensible defaults per theme:
+ *
+ *    [data-theme="light"] - cream/white page → keep dark forest glyph
+ *                            but tint highlight + spark so they don't
+ *                            disappear into a pure-white background
+ *                            (the brand cream #f5f1e8 is essentially
+ *                            invisible on #ffffff).
+ *
+ *    [data-theme="dark"]  - near-black page → invert to a warm cream
+ *                            glyph + bright accent so icons read.
+ *
+ *  Consumers can still override any --ew-* themselves; these only
+ *  apply when the consuming page is tagged with data-theme.
+ * ──────────────────────────────────────────────────────────────────── */
+[data-theme="light"] :where(.ew-icon) {
+  --ew-glyph:       #1a3a2a;
+  --ew-outline:     #0f2017;
+  --ew-secondary:   #2a7a4a;
+  --ew-highlight:   #d4eeda;   /* pale sage — readable on #ffffff */
+  --ew-glyph-2:     #142a1e;
+  --ew-spark-light: #ffe89d;   /* deeper cream-yellow so it pops */
+  --ew-rose:        #c0413a;
+  --ew-accent:      #d99500;
+  --ew-accent-deep: #b97f00;
+  --ew-signature:   #d99500;
+  --ew-bg:          rgba(26,58,42,0.08);
+  --ew-bg-opacity:  1;
+}
+
+[data-theme="dark"] :where(.ew-icon) {
+  --ew-glyph:       #e8e3d4;
+  --ew-outline:     #0e0e0e;
+  --ew-secondary:   #8fb89a;
+  --ew-highlight:   #2a3a2e;   /* dark sage — eye eyelid etc reads against dark */
+  --ew-glyph-2:     #2a2a28;
+  --ew-spark-light: #fff3cf;
+  --ew-rose:        #e8a3a3;
+  --ew-accent:      #f5b820;
+  --ew-accent-deep: #d99500;
+  --ew-signature:   #f5b820;
+  --ew-bg:          rgba(245,241,232,0.04);
+  --ew-bg-opacity:  1;
+}
+
 /* Anchor .ew-body via the CSS independent `translate` property instead of
    the SVG `transform="translate(12 12.4)"` attribute (which is REMOVED
    from every icon's source by the build). When CSS keyframes set
