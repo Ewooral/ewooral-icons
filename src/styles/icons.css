@@ -80,14 +80,18 @@
 }
 
 [data-theme="dark"] :where(.ew-icon) {
-  --ew-glyph:       #e8e3d4;
-  --ew-outline:     #0e0e0e;
-  --ew-secondary:   #8fb89a;
-  --ew-highlight:   #2a3a2e;   /* dark sage — eye eyelid etc reads against dark */
-  --ew-glyph-2:     #2a2a28;
+  /* Outer / primary surfaces: white-cream, gold, sage green.
+   * Deep forest is reserved for inward details only (strokes,
+   * center pins, inner accents) so the icon reads as light-on-
+   * dark with the brand-green showing only as definition. */
+  --ew-glyph:       #f5f1e8;   /* near-white primary fill */
+  --ew-outline:     #1a3a2a;   /* deep forest stroke — inward definition */
+  --ew-secondary:   #8fb89a;   /* sage accent (e.g. info-circle outer) */
+  --ew-highlight:   #1a3a2a;   /* deep forest — inward dots / center pins */
+  --ew-glyph-2:     #143a25;   /* deep forest layered tone for inner shapes */
   --ew-spark-light: #fff3cf;
   --ew-rose:        #e8a3a3;
-  --ew-accent:      #f5b820;
+  --ew-accent:      #f5b820;   /* brand gold accent */
   --ew-accent-deep: #d99500;
   --ew-signature:   #f5b820;
   --ew-bg:          rgba(245,241,232,0.04);
