@@ -173,6 +173,30 @@
   animation: ew-petal-draw 0.9s ease-out forwards;
 }
 
+/* BLINK — fallback for icons authored with data-motion="blink" when
+ * the consumer doesn't opt into GSAP. The MorphSVG-based blink lives
+ * in the GSAP engine; this CSS approximation fades the iris+pupil
+ * (.ew-blink-fade) so the eye reads as "closed" for a beat, then
+ * springs back. Eyelid stays drawn so the silhouette is preserved. */
+@keyframes ew-blink {
+  0%, 85%, 100% { opacity: 1; }
+  90%, 94%      { opacity: 0; }
+}
+@keyframes ew-blink-lid {
+  0%, 85%, 100% { transform: scaleY(1); }
+  90%, 94%      { transform: scaleY(0.08); }
+}
+:where(.ew-icon[data-motion="blink"]):not([data-trigger]):hover .ew-blink-fade,
+:where(.ew-icon[data-motion="blink"][data-play]) .ew-blink-fade {
+  animation: ew-blink var(--ew-dur, 2.4s) ease-in-out;
+}
+:where(.ew-icon[data-motion="blink"]):not([data-trigger]):hover .ew-blink-lid,
+:where(.ew-icon[data-motion="blink"][data-play]) .ew-blink-lid {
+  animation: ew-blink-lid var(--ew-dur, 2.4s) ease-in-out;
+  transform-box: view-box;
+  transform-origin: center;
+}
+
 /* SNIP — scissors blades close */
 @keyframes ew-snip-a {
   0%   { transform: rotate(0); }
