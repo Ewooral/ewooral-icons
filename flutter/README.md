@@ -58,7 +58,7 @@ Every icon (`EwHeart`, `EwBell`, ...) accepts:
 | `plain` | `bool` | `false` | strip the medallion chrome — glyph only |
 | `noPetal` | `bool` | `false` | hide the gold petal-ribbon (backdrop + ring stay) |
 | `motion` | `EwMotion` | per-icon (e.g. `EwHeart` → `pop`) | how the icon moves: `pop` / `tilt` / `swing` / `shake` / `spin` / `slideRight` / `slideLeft` / `slideUp` / `slideDown` / `flip` / `splash` / `none` |
-| `speed` | `Duration?` | `700ms` | cycle duration. Bigger = slower + longer pause between repeats. |
+| `speed` | `Duration?` | `4700ms` | cycle duration. Bigger = slower + longer pause between repeats. |
 | `delay` | `Duration?` | `0` | delay before motion starts after the trigger fires |
 | `trigger` | `EwTrigger` | `hover` | `hover` / `tap` / `focus` / `mount` / `viewport` (v0.2) / `manual` |
 | `iter` | `int` | `1` | play count. `0` = loop forever. |

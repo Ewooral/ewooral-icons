@@ -50,7 +50,7 @@
     var cs = getComputedStyle(el);
     var iter = (cs.getPropertyValue("--ew-iter") || "1").trim();
     if (iter === "infinite") return; // don't auto-clear loops
-    var dur = toMs((cs.getPropertyValue("--ew-dur") || "").trim(), 700);
+    var dur = toMs((cs.getPropertyValue("--ew-dur") || "").trim(), 4700);
     var dly = toMs((cs.getPropertyValue("--ew-delay") || "").trim(), 0);
     var iterNum = parseInt(iter, 10) || 1;
     var total = dur * iterNum + dly + 60;

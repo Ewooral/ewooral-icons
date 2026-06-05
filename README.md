@@ -191,7 +191,7 @@ Available sizes: 24, 32, 48, 96 px. Variants: default ink + `@inverse`.
 | `plain` | boolean | `false` | strip the medallion chrome — glyph only |
 | `noPetal` | boolean | `false` | hide the gold petal-ribbon (backdrop + ring stay) |
 | `motion` | `"play"` \| `"repeat"` \| `"off"` \| number | `"play"` | how many times the animation plays per trigger |
-| `speed` | string \| number | `"0.7s"` | cycle duration. Bigger = slower motion AND longer pause between repeats. |
+| `speed` | string \| number | `"4.7s"` | cycle duration. Bigger = slower motion AND longer pause between repeats. |
 | `delay` | string \| number | `"0s"` | delay before motion starts |
 | `trigger` | `"hover"` \| `"click"` \| `"focus"` \| `"mount"` \| `"viewport"` \| `"manual"` | `"hover"` | event that fires the animation |
 | `onPlay` | `() => void` | — | fires every time the animation starts (haptics, sound, analytics) |

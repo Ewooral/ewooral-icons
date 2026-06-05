@@ -866,7 +866,7 @@ function DetailPanel({ icon, onClose }: { icon: IconEntry | null; onClose: () =>
 
       <Section title="Timing">
         <Range label={`Size ${size}`} min={16} max={240} value={size} onChange={setSize} />
-        <Text label="Speed" value={speed} onChange={setSpeed} placeholder="0.7s" />
+        <Text label="Speed" value={speed} onChange={setSpeed} placeholder="4.7s" />
         <Text label="Delay" value={delay} onChange={setDelay} placeholder="0s" />
         <Text label="Repeat (-1 = ∞)" value={repeat} onChange={setRepeat} placeholder="1" />
         <Text label="Repeat delay" value={repeatDelay} onChange={setRepeatDelay} placeholder="1.6" />
@@ -1649,7 +1649,7 @@ function UsageTab(props: {
      <!-- ── Inline style: every brand colour is a CSS var ── -->
      style="
        --ew-iter: 1;                  /* CSS animation iteration count */
-       --ew-dur: 0.7s;                /* duration */
+       --ew-dur: 4.7s;                /* duration */
        --ew-delay: 0s;                /* delay before play */
        --ew-glyph: #1a3a2a;           /* primary forest fill */
        --ew-outline: #0f2017;         /* strokes */
@@ -1716,7 +1716,7 @@ export default function Example() {
                                             // tick, lid-open, ...
 
       /* ─── Timing / playback ───────────────────────────── */
-      speed="0.7s"                          // CSS time string OR ms number
+      speed="4.7s"                          // CSS time string OR ms number
       delay="0s"                            // delay before play${ember ? `
       ember                                 // emit gold particles on hover (GSAP)` : `
       // ember                              // emit gold particles on hover (GSAP)`}
@@ -1767,7 +1767,7 @@ export default function Example() {
 
       /* ─── Motion (Reanimated under the hood) ───────── */
       motion="${motion}"                  // pop, tilt, blink, tick, etc.
-      speed={700}                           // ms (RN uses Reanimated time)
+      speed={4700}                          // ms (RN uses Reanimated time)
       delay={0}                             // ms
       trigger="press"                       // "press" | "longPress" | "mount" | "manual"
       onPlay={() => {/* haptic, analytics… */}}
@@ -1861,7 +1861,7 @@ import "@ewooral/icons/styles/icons.css";
 
     engine="${engineName}"
     motion="${motion}"
-    speed="0.7s"
+    speed="4.7s"
     delay="0s"${ember ? `
     ember` : ""}
     trigger="hover"
@@ -1876,7 +1876,7 @@ import "@ewooral/icons/styles/icons.css";
   const live = buildLiveSnippets({
     icon, motion, engineName, size, ember, plain, noPetal, spark,
     // Usage tab is educational — show typical defaults rather than live values.
-    speed: "0.7s", delay: "0s", trigger: "hover",
+    speed: "4.7s", delay: "0s", trigger: "hover",
     repeat: "-1", repeatDelay: "1.6", colors: {},
   });
   const tabs: Array<[string, string, string]> = [

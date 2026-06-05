@@ -128,8 +128,8 @@ export type IconProps = Omit<React.SVGAttributes<SVGSVGElement>, "color"> & {
    *  - number   — play exactly N times
    */
   motion?: EWMotion;
-  /** Animation duration. CSS time string ("0.7s") or ms number (700).
-   *  Default 0.7s. Bigger = slower. */
+  /** Animation duration. CSS time string ("4.7s") or ms number (4700).
+   *  Default 4.7s. Bigger = slower. */
   speed?: string | number;
   /** Animation delay before motion starts. CSS time string or ms number.
    *  Default 0s. */
@@ -198,7 +198,7 @@ const ${pascal} = React.forwardRef<EWIconHandle, IconProps>(function ${pascal}(
     onPlay?.();
     if (playTimer.current != null) window.clearTimeout(playTimer.current);
     if (iter === "infinite") return;
-    const cycleMs = toMs(dur, 700);
+    const cycleMs = toMs(dur, 4700);
     const delayMs = toMs(dly, 0);
     const totalMs = cycleMs * Number(iter || 1) + delayMs + 60;
     playTimer.current = window.setTimeout(() => {
