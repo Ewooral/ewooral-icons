@@ -3,14 +3,15 @@
     <path class="ew-backdrop" fill="var(--ew-bg, currentColor)" fill-opacity="var(--ew-bg-opacity, 0.07)"
           d="M12 1.6 C 18 2.4 22.4 6.4 22.4 12 C 22.4 17.6 18 22 12 22.4 C 6 22 1.6 17.6 1.6 12 C 1.6 6.4 6 2.4 12 1.6 Z"/>
     <path fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.45" stroke-dasharray="0.4 1.8" stroke-linecap="round"
-          d="M12 3.2 C 17.2 3.9 20.8 7.2 20.8 12 C 20.8 16.8 17.2 20.4 12 20.8 C 6.8 20.4 3.2 16.8 3.2 12 C 3.2 7.2 6.8 3.9 12 3.2 Z"/><g class="ew-splash" aria-hidden="true">
+          d="M12 3.2 C 17.2 3.9 20.8 7.2 20.8 12 C 20.8 16.8 17.2 20.4 12 20.8 C 6.8 20.4 3.2 16.8 3.2 12 C 3.2 7.2 6.8 3.9 12 3.2 Z"/>
+  </g>
+  <g class="ew-splash" aria-hidden="true">
       <circle class="ew-p1" cx="19.6" cy="5.5" r="0.9" fill="var(--ew-accent, #f5b820)"/>
       <circle class="ew-p2" cx="19.6" cy="5.5" r="0.75" fill="var(--ew-accent, #f5b820)"/>
       <circle class="ew-p3" cx="19.6" cy="5.5" r="0.85" fill="var(--ew-accent, #f5b820)"/>
       <circle class="ew-p4" cx="19.6" cy="5.5" r="0.7" fill="var(--ew-accent, #f5b820)"/>
       <circle class="ew-p5" cx="19.6" cy="5.5" r="0.8" fill="var(--ew-accent, #f5b820)"/>
     </g>
-  </g>
   <g class="ew-signature" aria-hidden="true"><ellipse cx="18.8" cy="5.0" rx="0.75" ry="1.35" fill="none" stroke="var(--ew-signature, #f5b820)" stroke-width="0.55" transform="rotate(-25 18.8 5.0)"/><ellipse cx="20.3" cy="6.4" rx="0.75" ry="1.35" fill="none" stroke="var(--ew-signature, #f5b820)" stroke-width="0.55" transform="rotate(25 20.3 6.4)"/></g>
   <g class="ew-body-anchor" transform="translate(12 12.4)"><g class="ew-body"><circle cx="0" cy="0" r="5.2" fill="none" stroke="var(--ew-secondary, #8fb89a)" stroke-width="1.6" opacity="0.35"/><path d="M0 -5.2 A5.2 5.2 0 0 1 5.2 0" fill="none" stroke="var(--ew-accent,#f5b820)" stroke-width="1.6" stroke-linecap="round"/></g>
   </g>
