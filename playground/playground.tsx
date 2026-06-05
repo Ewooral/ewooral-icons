@@ -293,6 +293,9 @@ const ICON_ARCHETYPES: Record<string, Archetype> = {
   alert:         { motion: "shake", engine: "css" },                          // (already authored)
   "alert-circle":{ motion: "shake", engine: "css" },
 
+  // People
+  group:         { motion: "pop",   engine: "css" },                          // team greeting
+
   // Notifications
   bell:          { motion: "swing", engine: "css" },                          // (already authored)
   "bell-off":    { motion: "tilt",  engine: "css" },
