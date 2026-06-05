@@ -65,12 +65,12 @@
  *  apply when the consuming page is tagged with data-theme.
  * ──────────────────────────────────────────────────────────────────── */
 [data-theme="light"] :where(.ew-icon) {
-  --ew-glyph:       #1a3a2a;
+  --ew-glyph:       #1a3a2a;   /* brand forest primary */
   --ew-outline:     #0f2017;
-  --ew-secondary:   #2a7a4a;
-  --ew-highlight:   #d4eeda;   /* pale sage — readable on #ffffff */
+  --ew-secondary:   #2a7a4a;   /* mid forest for accents */
+  --ew-highlight:   #f5d68c;   /* warm pale gold — readable on white, not green */
   --ew-glyph-2:     #142a1e;
-  --ew-spark-light: #ffe89d;   /* deeper cream-yellow so it pops */
+  --ew-spark-light: #ffd47a;   /* deeper gold for inner sparks */
   --ew-rose:        #c0413a;
   --ew-accent:      #d99500;
   --ew-accent-deep: #b97f00;
