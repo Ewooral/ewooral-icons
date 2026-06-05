@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ewooral/icons — Playground</title>
     <style>
+      /* ─────────────────────────────────────────────────────────────
+       *  Three playground themes. Each block also overrides the
+       *  --ew-* icon vars so the icons read against the theme bg:
+       *  dark glyphs sit invisibly on the dark page, and the green/
+       *  company theme would have icons matching the bg green.
+       *  Library SVGs only fall back to forest defaults when no
+       *  --ew-* is in scope, so these overrides cascade into every
+       *  icon without per-icon edits.
+       * ──────────────────────────────────────────────────────────── */
+
+      /* DARK (near-black bg) — cream-on-dark glyph, gold accent. */
       :root {
         --bg: #0e0e0e;
         --bg-2: #171717;
@@ -14,7 +25,22 @@
         --ink-faint: #636363;
         --accent: #f5b820;
         --line: rgba(255,255,255,0.08);
+
+        --ew-glyph:       #e8e3d4;
+        --ew-outline:     #0e0e0e;
+        --ew-secondary:   #8fb89a;
+        --ew-highlight:   #ffffff;
+        --ew-glyph-2:     #2a2a28;
+        --ew-spark-light: #fff3cf;
+        --ew-rose:        #e8a3a3;
+        --ew-accent-deep: #d99500;
+        --ew-accent:      #f5b820;
+        --ew-signature:   #f5b820;
+        --ew-bg:          rgba(245,241,232,0.04);
+        --ew-bg-opacity:  1;
       }
+
+      /* LIGHT (cream paper bg) — brand forest glyph, deep gold accent. */
       [data-theme="light"] {
         --bg: #f8f6f0;
         --bg-2: #ffffff;
@@ -24,7 +50,23 @@
         --ink-faint: #8a8a84;
         --accent: #d99500;
         --line: rgba(0,0,0,0.1);
+
+        --ew-glyph:       #1a3a2a;
+        --ew-outline:     #0f2017;
+        --ew-secondary:   #2a7a4a;
+        --ew-highlight:   #fffaf0;
+        --ew-glyph-2:     #142a1e;
+        --ew-spark-light: #fff3cf;
+        --ew-rose:        #c0413a;
+        --ew-accent-deep: #b97f00;
+        --ew-accent:      #d99500;
+        --ew-signature:   #d99500;
+        --ew-bg:          rgba(26,58,42,0.06);
+        --ew-bg-opacity:  1;
       }
+
+      /* GREEN / COMPANY (forest bg) — cream glyph + sandy gold so
+       * the icon stands off the brand-green page background. */
       [data-theme="green"] {
         --bg: #1a3a2a;
         --bg-2: #142a1e;
@@ -34,6 +76,19 @@
         --ink-faint: #6b6760;
         --accent: #f5b820;
         --line: rgba(245,241,232,0.08);
+
+        --ew-glyph:       #f5f1e8;
+        --ew-outline:     #0f2017;
+        --ew-secondary:   #d99500;
+        --ew-highlight:   #fff3cf;
+        --ew-glyph-2:     #e8e3d4;
+        --ew-spark-light: #fff8d6;
+        --ew-rose:        #f5a3a3;
+        --ew-accent-deep: #c08010;
+        --ew-accent:      #f5b820;
+        --ew-signature:   #f5b820;
+        --ew-bg:          rgba(245,241,232,0.06);
+        --ew-bg-opacity:  1;
       }
       * { box-sizing: border-box; }
       html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, -apple-system, sans-serif; min-height: 100vh; }
