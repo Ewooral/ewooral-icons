@@ -1247,6 +1247,21 @@ function buildLiveSnippets(p: {
   const overriddenColors = Object.entries(colors);
   const hasColorOverrides = overriddenColors.length > 0;
 
+  // CSS vars that have a dedicated React prop in the wrapper — emit
+  // these as props instead of style overrides for the cleanest output.
+  // Keep the rest (rose, spark-light, glyph-2, signature) as CSS-var
+  // style entries since they have no shorthand prop.
+  const PROP_VARS: Record<string, string> = {
+    "--ew-glyph":     "color",
+    "--ew-accent":    "accent",
+    "--ew-bg":        "bg",
+    "--ew-highlight": "highlight",
+    "--ew-secondary": "secondary",
+    "--ew-outline":   "outline",
+  };
+  const propColorEntries = overriddenColors.filter(([k]) => PROP_VARS[k]);
+  const styleColorEntries = overriddenColors.filter(([k]) => !PROP_VARS[k]);
+
   // ───── React ─────
   const reactProps = [
     `      size={${size}}`,
@@ -1262,8 +1277,11 @@ function buildLiveSnippets(p: {
   if (plain)   reactProps.push(`      plain`);
   if (noPetal) reactProps.push(`      noPetal`);
   if (ember)   reactProps.push(`      ember`);
-  if (hasColorOverrides) {
-    const lines = overriddenColors
+  for (const [k, v] of propColorEntries) {
+    reactProps.push(`      ${PROP_VARS[k]}="${v}"`);
+  }
+  if (styleColorEntries.length) {
+    const lines = styleColorEntries
       .map(([k, v]) => `        "${k}": "${v}",`)
       .join("\n");
     reactProps.push(`      style={{\n${lines}\n      }}`);

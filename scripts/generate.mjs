@@ -98,13 +98,25 @@ export type EWIconHandle = {
 export type IconProps = Omit<React.SVGAttributes<SVGSVGElement>, "color"> & {
   /** Sets both width and height. */
   size?: number | string;
-  /** Glyph + medallion-backdrop colour. Drives currentColor. */
+  /** Glyph + medallion-backdrop colour. Drives currentColor + --ew-glyph. */
   color?: string;
-  /** Petal-ribbon colour. Defaults to the brand gold #f5b820. */
+  /** Petal-ribbon / gold accent colour. Maps to --ew-accent.
+   *  Defaults to brand gold #f5b820. */
   accent?: string;
   /** Medallion disc background. Any CSS colour. When unset, the disc is a
    *  subtle 7%-opacity tint of \`color\`. When set, it fills solid. */
   bg?: string;
+  /** Inner highlight fill — drives --ew-highlight. Used as the body
+   *  fill on cloud / eye eyelid / mail flap / gift wrap and as the
+   *  inner-accent dot on compass etc. Defaults to pale sage in dark
+   *  theme, warm gold-cream in light theme. */
+  highlight?: string;
+  /** Secondary sage accent — drives --ew-secondary. Used for info-circle
+   *  outer disc, eye iris, dashed ring accents. */
+  secondary?: string;
+  /** Stroke / outline colour around shapes — drives --ew-outline.
+   *  Default deep forest #1a3a2a in dark theme, darker forest in light. */
+  outline?: string;
   /** Hide the gold petal-ribbon (backdrop + ring stay). */
   noPetal?: boolean;
   /** Strip the medallion chrome — glyph only. */
@@ -148,7 +160,7 @@ const ${pascal} = React.forwardRef<EWIconHandle, IconProps>(function ${pascal}(
   {
     size = 24,
     className,
-    color, accent, bg,
+    color, accent, bg, highlight, secondary, outline,
     noPetal, plain,
     motion = "play",
     speed, delay,
@@ -255,6 +267,9 @@ const ${pascal} = React.forwardRef<EWIconHandle, IconProps>(function ${pascal}(
     ...(color ? { color } : {}),
     ...(accent ? ({ ["--ew-accent" as never]: accent } as React.CSSProperties) : {}),
     ...(bg ? ({ ["--ew-bg" as never]: bg, ["--ew-bg-opacity" as never]: 1 } as React.CSSProperties) : {}),
+    ...(highlight ? ({ ["--ew-highlight" as never]: highlight } as React.CSSProperties) : {}),
+    ...(secondary ? ({ ["--ew-secondary" as never]: secondary } as React.CSSProperties) : {}),
+    ...(outline ? ({ ["--ew-outline" as never]: outline } as React.CSSProperties) : {}),
     ["--ew-iter" as never]: iter,
     ...(dur ? ({ ["--ew-dur" as never]: dur } as React.CSSProperties) : {}),
     ...(dly ? ({ ["--ew-delay" as never]: dly } as React.CSSProperties) : {}),
