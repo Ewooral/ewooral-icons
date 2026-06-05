@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EW spark signature — candidates</title>
+    <style>
+      :root {
+        --bg: #1a3a2a;
+        --bg-2: #142a1e;
+        --bg-3: #0f2017;
+        --ink: #f5f1e8;
+        --ink-dim: #a8a39a;
+        --accent: #f5b820;
+        --sage: #8fb89a;
+      }
+      [data-theme="light"] {
+        --bg: #ffffff;
+        --bg-2: #f7f7f5;
+        --bg-3: #eeede9;
+        --ink: #1c1c1a;
+        --ink-dim: #5a5a56;
+      }
+      [data-theme="dark"] {
+        --bg: #0e0e0e;
+        --bg-2: #171717;
+        --bg-3: #1f1f1f;
+        --ink: #f0f0f0;
+        --ink-dim: #a0a0a0;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font: 14px/1.5 ui-sans-serif, system-ui, sans-serif;
+        padding: 36px;
+        min-height: 100vh;
+      }
+      h1 { font-size: 24px; margin: 0 0 6px; }
+      .lede { color: var(--sage); margin: 0 0 28px; max-width: 70ch; }
+      .theme-row {
+        margin-bottom: 28px;
+        display: flex;
+        gap: 8px;
+      }
+      button.theme {
+        background: transparent;
+        color: var(--ink-dim);
+        border: 1px solid var(--bg-3);
+        padding: 8px 14px;
+        border-radius: 4px;
+        font-family: ui-monospace, monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        cursor: pointer;
+      }
+      button.theme.on {
+        background: var(--accent);
+        color: var(--bg);
+        border-color: var(--accent);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      .card {
+        background: var(--bg-2);
+        border: 1px solid var(--bg-3);
+        border-radius: 12px;
+        padding: 22px 18px 16px;
+        text-align: center;
+      }
+      .card h2 {
+        margin: 0 0 4px;
+        font-size: 16px;
+      }
+      .card .tag {
+        color: var(--ink-dim);
+        font-size: 11px;
+        font-family: ui-monospace, monospace;
+        margin-bottom: 18px;
+        min-height: 2.6em;
+      }
+      .stage {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .stage svg { width: 100%; height: auto; }
+      .label {
+        font-size: 10px;
+        color: var(--ink-dim);
+        font-family: ui-monospace, monospace;
+      }
+    </style>
+  </head>
+  <body data-theme="default">
+    <h1>EW spark signature — candidates</h1>
+    <p class="lede">
+      Same eye + clock icons rendered with four candidate signature marks at the medallion's top-right.
+      Switch themes to see how each holds up across the three brand backdrops.
+    </p>
+
+    <div class="theme-row">
+      <button class="theme on" data-theme="default">Company</button>
+      <button class="theme" data-theme="light">Light</button>
+      <button class="theme" data-theme="dark">Dark</button>
+    </div>
+
+    <div class="grid">
+      <!-- Candidate 0: current dot/petal (reference) -->
+      <div class="card">
+        <h2>0 — Current</h2>
+        <div class="tag">curvy gold petal-ribbon (existing)</div>
+        <div class="stage">
+          <div>
+            <svg viewBox="0 0 24 24"><g data-base></g>
+              <path fill="var(--accent)" d="M18.5 3.4 C 20.4 3.4 21.6 4.8 21.4 6.6 C 21.2 7.4 20.4 7.7 19.4 7.5 C 18.4 7.2 17.6 6.4 17.6 5.4 C 17.6 4.4 18 3.8 18.5 3.4 Z"/>
+              <g data-eye></g>
+            </svg>
+            <div class="label">eye</div>
+          </div>
+          <div>
+            <svg viewBox="0 0 24 24"><g data-base></g>
+              <path fill="var(--accent)" d="M18.5 3.4 C 20.4 3.4 21.6 4.8 21.4 6.6 C 21.2 7.4 20.4 7.7 19.4 7.5 C 18.4 7.2 17.6 6.4 17.6 5.4 C 17.6 4.4 18 3.8 18.5 3.4 Z"/>
+              <g data-clock></g>
+            </svg>
+            <div class="label">clock</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Candidate 1: Adinkrahene -->
+      <div class="card">
+        <h2>1 — Adinkrahene</h2>
+        <div class="tag">three concentric circles · "chief of Adinkra" — leadership</div>
+        <div class="stage">
+          <div>
+            <svg viewBox="0 0 24 24"><g data-base></g>
+              <circle cx="19.4" cy="5.4" r="2.4" fill="none" stroke="var(--accent)" stroke-width="0.55"/>
+              <circle cx="19.4" cy="5.4" r="1.5" fill="none" stroke="var(--accent)" stroke-width="0.55"/>
+              <circle cx="19.4" cy="5.4" r="0.6" fill="var(--accent)"/>
+              <g data-eye></g>
+            </svg>
+            <div class="label">eye</div>
+          </div>
+          <div>
+            <svg viewBox="0 0 24 24"><g data-base></g>
+              <circle cx="19.4" cy="5.4" r="2.4" fill="none" stroke="var(--accent)" stroke-width="0.55"/>
+              <circle cx="19.4" cy="5.4" r="1.5" fill="none" stroke="var(--accent)" stroke-width="0.55"/>
+              <circle cx="19.4" cy="5.4" r="0.6" fill="var(--accent)"/>
+              <g data-clock></g>
+            </svg>
+            <div class="label">clock</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Candidate 2: Sankofa (simplified heart-with-curl) -->
+      <div class="card">
+        <h2>2 — Sankofa</h2>
+        <div class="tag">heart + spiral · "go back, retrieve" — heritage</div>
+        <div class="stage">
+          <div>
+            <svg viewBox="0 0 24 24"><g data-base></g>
+              <!-- stylised heart-with-tail (simplified Sankofa) -->
+              <path fill="var(--accent)"
+                    d="M19.4 4 C 18.4 4 18 4.6 18 5.3 C 18 6.4 19.4 7.4 19.4 7.4 C 19.4 7.4 20.8 6.4 20.8 5.3 C 20.8 4.6 20.4 4 19.4 4 Z" />
+              <path fill="none" stroke="var(--accent)" stroke-width="0.5" stroke-linecap="round"
+                    d="M21.0 6.5 C 22 7 22 8 21.2 8.1"/>
+              <g data-eye></g>
+            </svg>
+            <div class="label">eye</div>
+          </div>
+          <div>
+            <svg viewBox="0 0 24 24"><g data-base></g>
+              <path fill="var(--accent)"
+                    d="M19.4 4 C 18.4 4 18 4.6 18 5.3 C 18 6.4 19.4 7.4 19.4 7.4 C 19.4 7.4 20.8 6.4 20.8 5.3 C 20.8 4.6 20.4 4 19.4 4 Z" />
+              <path fill="none" stroke="var(--accent)" stroke-width="0.5" stroke-linecap="round"
+                    d="M21.0 6.5 C 22 7 22 8 21.2 8.1"/>
+              <g data-clock></g>
+            </svg>
+            <div class="label">clock</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Candidate 3: Nkonsonkonson (interlocked links) -->
+      <div class="card">
+        <h2>3 — Nkonsonkonson</h2>
+        <div class="tag">two interlocked links · unity / connected businesses</div>
+        <div class="stage">
+          <div>
+            <svg viewBox="0 0 24 24"><g data-base></g>
+              <ellipse cx="18.8" cy="5.0" rx="0.75" ry="1.35" fill="none" stroke="var(--accent)" stroke-width="0.55" transform="rotate(-25 18.8 5.0)"/>
+              <ellipse cx="20.3" cy="6.4" rx="0.75" ry="1.35" fill="none" stroke="var(--accent)" stroke-width="0.55" transform="rotate(25 20.3 6.4)"/>
+              <g data-eye></g>
+            </svg>
+            <div class="label">eye</div>
+          </div>
+          <div>
+            <svg viewBox="0 0 24 24"><g data-base></g>
+              <ellipse cx="18.8" cy="5.0" rx="0.75" ry="1.35" fill="none" stroke="var(--accent)" stroke-width="0.55" transform="rotate(-25 18.8 5.0)"/>
+              <ellipse cx="20.3" cy="6.4" rx="0.75" ry="1.35" fill="none" stroke="var(--accent)" stroke-width="0.55" transform="rotate(25 20.3 6.4)"/>
+              <g data-clock></g>
+            </svg>
+            <div class="label">clock</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      // Build the shared base chrome + glyphs once, clone into every <svg>.
+      const SVG = "http://www.w3.org/2000/svg";
+      function base() {
+        const g = document.createElementNS(SVG, "g");
+        g.innerHTML = `
+          <path fill="var(--ink)" fill-opacity="0.07"
+                d="M12 1.6 C 18 2.4 22.4 6.4 22.4 12 C 22.4 17.6 18 22 12 22.4 C 6 22 1.6 17.6 1.6 12 C 1.6 6.4 6 2.4 12 1.6 Z"/>
+          <path fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.45"
+                stroke-dasharray="0.4 1.8" stroke-linecap="round"
+                d="M12 3.2 C 17.2 3.9 20.8 7.2 20.8 12 C 20.8 16.8 17.2 20.4 12 20.8 C 6.8 20.4 3.2 16.8 3.2 12 C 3.2 7.2 6.8 3.9 12 3.2 Z"/>`;
+        return g;
+      }
+      function eyeGlyph() {
+        const g = document.createElementNS(SVG, "g");
+        g.setAttribute("transform", "translate(12 12.4)");
+        g.innerHTML = `
+          <path d="M-6.4 0 C -3.4 -4.2 3.4 -4.2 6.4 0 C 3.4 4.2 -3.4 4.2 -6.4 0 Z" fill="#f5f1e8" stroke="#0f2017" stroke-width="0.9" stroke-linejoin="round"/>
+          <circle cx="0" cy="0" r="2.8" fill="#8fb89a" stroke="#0f2017" stroke-width="0.9"/>
+          <circle cx="0" cy="0" r="1.3" fill="#1a3a2a"/>
+          <circle cx="0.9" cy="-0.9" r="0.5" fill="#fff3cf"/>`;
+        return g;
+      }
+      function clockGlyph() {
+        const g = document.createElementNS(SVG, "g");
+        g.setAttribute("transform", "translate(12 12.4)");
+        g.innerHTML = `
+          <circle cx="0" cy="0" r="6.2" fill="#1a3a2a" stroke="#0f2017" stroke-width="0.9"/>
+          <circle cx="0" cy="0" r="6.2" fill="none" stroke="#8fb89a" stroke-width="0.6" stroke-dasharray="0.3 1.55"/>
+          <circle cx="0" cy="0" r="4.6" fill="#142a1e"/>
+          <path d="M0 0 L0 -3.4" stroke="var(--accent)" stroke-width="1.1" stroke-linecap="round"/>
+          <path d="M0 0 L2.6 1" stroke="var(--accent)" stroke-width="1.1" stroke-linecap="round"/>
+          <circle cx="0" cy="0" r="0.8" fill="#f5f1e8"/>`;
+        return g;
+      }
+      document.querySelectorAll("[data-base]").forEach((slot) => {
+        const parent = slot.parentNode;
+        parent.insertBefore(base(), parent.firstChild);
+        slot.remove();
+      });
+      document.querySelectorAll("[data-eye]").forEach((slot) => {
+        slot.parentNode.appendChild(eyeGlyph());
+        slot.remove();
+      });
+      document.querySelectorAll("[data-clock]").forEach((slot) => {
+        slot.parentNode.appendChild(clockGlyph());
+        slot.remove();
+      });
+      document.querySelectorAll("button.theme").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.body.dataset.theme = btn.dataset.theme;
+          document.querySelectorAll("button.theme").forEach((b) =>
+            b.classList.toggle("on", b === btn),
+          );
+        });
+      });
+    </script>
+  </body>
+</html>

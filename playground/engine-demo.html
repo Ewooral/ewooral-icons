@@ -72,6 +72,12 @@
         height: 72px;
         cursor: pointer;
       }
+      /* Blink card gets bigger glyphs so the lid morph + colour swatches read. */
+      [data-slot="blink-eye"] .ew-icon,
+      [data-slot="theme-witness"] .ew-icon {
+        width: 180px;
+        height: 180px;
+      }
       .controls {
         margin-top: 16px;
         display: flex;
@@ -167,6 +173,31 @@
           <button class="ghost" data-stop="motion">Stop</button>
         </div>
       </div>
+      <div class="card" style="grid-column: span 2;">
+        <h2>Blink (eye, MorphSVG) + theme vars</h2>
+        <div class="tag">data-motion="blink" data-engine="gsap" — pickers below tweak <code>--ew-…</code> vars on BOTH glyphs</div>
+        <div class="stage" style="gap: 32px; justify-content: space-around;">
+          <span data-slot="blink-eye"></span>
+          <span data-slot="theme-witness"></span>
+        </div>
+        <div class="controls">
+          <button data-play="blink-eye">Play</button>
+          <button class="ghost" data-stop="blink-eye">Stop</button>
+        </div>
+        <div class="color-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px 16px; margin-top: 18px; font-size: 11px;">
+          <label>--ew-glyph <input type="color" data-var="--ew-glyph" value="#1a3a2a" /></label>
+          <label>--ew-outline <input type="color" data-var="--ew-outline" value="#0f2017" /></label>
+          <label>--ew-secondary <input type="color" data-var="--ew-secondary" value="#8fb89a" /></label>
+          <label>--ew-highlight <input type="color" data-var="--ew-highlight" value="#f5f1e8" /></label>
+          <label>--ew-glyph-2 <input type="color" data-var="--ew-glyph-2" value="#142a1e" /></label>
+          <label>--ew-spark-light <input type="color" data-var="--ew-spark-light" value="#fff3cf" /></label>
+          <label>--ew-rose <input type="color" data-var="--ew-rose" value="#e8a3a3" /></label>
+          <label>--ew-accent-deep <input type="color" data-var="--ew-accent-deep" value="#d99500" /></label>
+          <label>--ew-accent <input type="color" data-var="--ew-accent" value="#f5b820" /></label>
+          <label>--ew-bg <input type="color" data-var="--ew-bg" value="#f5f1e8" /></label>
+          <button type="button" data-reset-colors style="grid-column: 2 / span 2; background: transparent; color: var(--color-ink-dim); border: 1px solid var(--color-bg-3); padding: 6px;">Reset all</button>
+        </div>
+      </div>
     </div>
 
     <pre><code>&lt;!-- Vanilla: just declare the engine on the icon --&gt;
@@ -229,6 +260,8 @@ import { EwIcon } from '@ewooral/icons/react';
     <link rel="stylesheet" href="../src/styles/icons.css" />
     <script type="module">
       import * as engine from '../src/engines/index.js';
+      import eyeSvgRaw from '@svg/eye.svg?raw';
+      import scissorsSvgRaw from '@svg/scissors.svg?raw';
       var tpl = document.getElementById('glyph');
       var ENGINES = ['css', 'gsap', 'motion'];
       ENGINES.forEach(function (name) {
@@ -267,6 +300,68 @@ import { EwIcon } from '@ewooral/icons/react';
         engine.setDefaultEngine(e.target.value);
         engine.preloadEngine(e.target.value);
       });
+
+      // ──────────────────────────────────────────────────────────────
+      // BLINK card — inject the real eye.svg, set data-motion="blink"
+      // data-engine="gsap" and wire hover/play/stop the same way.
+      // ──────────────────────────────────────────────────────────────
+      (function () {
+        var slot = document.querySelector('[data-slot="blink-eye"]');
+        slot.innerHTML = eyeSvgRaw;
+        var el = slot.querySelector('svg');
+        if (!el) return;
+        el.setAttribute('data-engine', 'gsap');
+        el.setAttribute('data-motion', 'blink');
+        el.setAttribute('data-trigger', 'manual');
+        // Loop forever with a 1.6s pause between blinks while hovered.
+        el.setAttribute('data-repeat', '-1');
+        el.setAttribute('data-repeat-delay', '1.6');
+        // Real-time ember emitter — gold particles rise from the spark
+        // while hovered. Spawns via JS, so it works on top of MorphSVG.
+        el.setAttribute('data-ember', 'true');
+        el.addEventListener('mouseenter', function () {
+          engine.play(el);
+        });
+        el.addEventListener('mouseleave', function () {
+          engine.stop(el);
+        });
+
+        // Colour-picker → CSS var bridge. Each input writes its current
+        // value as an inline style on the eye SVG so var(--ew-foo)
+        // resolves to the picked colour without touching globals.
+        // Second tile — a non-eye icon (scissors) sharing the same colour
+        // pickers, so we can verify the var system works uniformly across
+        // every icon, not just the one with morph hooks.
+        var witnessSlot = document.querySelector('[data-slot="theme-witness"]');
+        witnessSlot.innerHTML = scissorsSvgRaw;
+        var witness = witnessSlot.querySelector('svg');
+
+        var pickers = document.querySelectorAll('[data-var]');
+        var defaults = {};
+        function applyVar(varName, value) {
+          el.style.setProperty(varName, value);
+          if (witness) witness.style.setProperty(varName, value);
+        }
+        function clearVar(varName) {
+          el.style.removeProperty(varName);
+          if (witness) witness.style.removeProperty(varName);
+        }
+        pickers.forEach(function (p) {
+          defaults[p.dataset.var] = p.value;
+          p.addEventListener('input', function () {
+            applyVar(p.dataset.var, p.value);
+          });
+        });
+        var resetBtn = document.querySelector('[data-reset-colors]');
+        if (resetBtn) {
+          resetBtn.addEventListener('click', function () {
+            pickers.forEach(function (p) {
+              p.value = defaults[p.dataset.var];
+              clearVar(p.dataset.var);
+            });
+          });
+        }
+      })();
     </script>
   </body>
 </html>
