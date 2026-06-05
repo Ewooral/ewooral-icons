@@ -80,15 +80,20 @@
 }
 
 [data-theme="dark"] :where(.ew-icon) {
-  /* Outer / primary surfaces: white-cream, gold, sage green.
-   * Deep forest is reserved for inward details only (strokes,
-   * center pins, inner accents) so the icon reads as light-on-
-   * dark with the brand-green showing only as definition. */
+  /* All FILL surfaces stay light so the icon reads on a dark page:
+   *   glyph     = near-white primary
+   *   highlight = pale sage — used as body fill by cloud, eye eyelid,
+   *               mail flap, gift wrap; can't be dark or those icons
+   *               disappear at night.
+   *   secondary = mid sage — accent green (info-circle outer etc).
+   * Deep forest only appears as OUTLINE / STROKE around shapes — that
+   * draws the brand-green definition without filling any large area
+   * with the bg-matching colour. */
   --ew-glyph:       #f5f1e8;   /* near-white primary fill */
-  --ew-outline:     #1a3a2a;   /* deep forest stroke — inward definition */
-  --ew-secondary:   #8fb89a;   /* sage accent (e.g. info-circle outer) */
-  --ew-highlight:   #1a3a2a;   /* deep forest — inward dots / center pins */
-  --ew-glyph-2:     #143a25;   /* deep forest layered tone for inner shapes */
+  --ew-outline:     #1a3a2a;   /* deep forest stroke — outline around shapes */
+  --ew-secondary:   #8fb89a;   /* mid sage (info-circle outer etc) */
+  --ew-highlight:   #cce6d4;   /* pale sage — body fill for cloud / eye / mail */
+  --ew-glyph-2:     #d4cec0;   /* slightly darker cream for layered fills */
   --ew-spark-light: #fff3cf;
   --ew-rose:        #e8a3a3;
   --ew-accent:      #f5b820;   /* brand gold accent */
