@@ -65,7 +65,13 @@ for (const file of files) {
   //   NO_PETAL = chrome (minus petal-ribbon) + glyph
   //   PLAIN    = glyph only (medallion chrome stripped)
   const innerFull = inner;
-  const innerNoPetal = inner.replace(/<(circle|rect|path)[^>]*class="ew-spark"[^>]*\/>/g, "");
+  // noPetal drops both gold accent groups that sit outside the body:
+  //   <g class="ew-signature">  the Akan brand mark (Nkonsonkonson / petal etc)
+  //   <g class="ew-splash">     the 5-dot sparkle pop that fires on hover
+  // Together they make up the "gold petal-ribbon" the prop originally hid.
+  const innerNoPetal = inner
+    .replace(/<g class="ew-signature"[^>]*>[\s\S]*?<\/g>/g, "")
+    .replace(/<g class="ew-splash"[^>]*>[\s\S]*?<\/g>/g, "");
   const innerPlain = inner.replace(/<g[^>]*class="ew-chrome"[^>]*>[\s\S]*?<\/g>/g, "");
 
   const tsx = `"use client";
