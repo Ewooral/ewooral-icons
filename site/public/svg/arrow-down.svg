@@ -5,15 +5,7 @@
     <path fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.45" stroke-dasharray="0.4 1.8" stroke-linecap="round"
           d="M12 3.2 C 17.2 3.9 20.8 7.2 20.8 12 C 20.8 16.8 17.2 20.4 12 20.8 C 6.8 20.4 3.2 16.8 3.2 12 C 3.2 7.2 6.8 3.9 12 3.2 Z"/>
   </g>
-  <g class="ew-splash" aria-hidden="true">
-      <circle class="ew-p1" cx="19.6" cy="5.5" r="0.9" fill="var(--ew-accent, #f5b820)"/>
-      <circle class="ew-p2" cx="19.6" cy="5.5" r="0.75" fill="var(--ew-accent, #f5b820)"/>
-      <circle class="ew-p3" cx="19.6" cy="5.5" r="0.85" fill="var(--ew-accent, #f5b820)"/>
-      <circle class="ew-p4" cx="19.6" cy="5.5" r="0.7" fill="var(--ew-accent, #f5b820)"/>
-      <circle class="ew-p5" cx="19.6" cy="5.5" r="0.8" fill="var(--ew-accent, #f5b820)"/>
-    </g>
-  <g class="ew-signature" aria-hidden="true"><ellipse cx="18.8" cy="5.0" rx="0.75" ry="1.35" fill="none" stroke="var(--ew-signature, #f5b820)" stroke-width="0.55" transform="rotate(-25 18.8 5.0)"/><ellipse cx="20.3" cy="6.4" rx="0.75" ry="1.35" fill="none" stroke="var(--ew-signature, #f5b820)" stroke-width="0.55" transform="rotate(25 20.3 6.4)"/></g>
   <g class="ew-body-anchor" transform="translate(12 12.4)"><g class="ew-body"><path d="M0 -5.4 V4.6" stroke="var(--ew-accent,#f5b820)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-    <path d="M-4 1 L0 5.4 L4 1" fill="none" stroke="var(--ew-highlight, #f5f1e8)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <path d="M-4 1 L0 5.4 L4 1" fill="none" stroke="var(--ew-highlight, #8fb89a)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
   </g>
 </svg>

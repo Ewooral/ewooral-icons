@@ -17,7 +17,7 @@
     <path class="ew-blink-lid"
           d="M-6.4 0 C -3.4 -4.2 3.4 -4.2 6.4 0 C 3.4 4.2 -3.4 4.2 -6.4 0 Z"
           data-blink-closed="M-6.4 0 C -3.4 -0.4 3.4 -0.4 6.4 0 C 3.4 0.4 -3.4 0.4 -6.4 0 Z"
-          fill="var(--ew-highlight, #f5f1e8)" stroke="var(--ew-outline, #1a3a2a)" stroke-width="0.9" stroke-linejoin="round"/>
+          fill="var(--ew-highlight, #8fb89a)" stroke="var(--ew-outline, #1a3a2a)" stroke-width="0.9" stroke-linejoin="round"/>
     <g class="ew-blink-fade">
       <circle cx="0" cy="0" r="2.8" fill="var(--ew-secondary, #8fb89a)" stroke="var(--ew-outline, #1a3a2a)" stroke-width="0.9"/>
       <circle cx="0" cy="0" r="1.3" fill="var(--ew-glyph, #3a6b48)"/>

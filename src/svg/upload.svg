@@ -14,7 +14,7 @@
     </g>
   <g class="ew-signature" aria-hidden="true"><ellipse cx="18.8" cy="5.0" rx="0.75" ry="1.35" fill="none" stroke="var(--ew-signature, #f5b820)" stroke-width="0.55" transform="rotate(-25 18.8 5.0)"/><ellipse cx="20.3" cy="6.4" rx="0.75" ry="1.35" fill="none" stroke="var(--ew-signature, #f5b820)" stroke-width="0.55" transform="rotate(25 20.3 6.4)"/></g>
   <g class="ew-body-anchor" transform="translate(12 12.4)"><g class="ew-body"><path d="M0 5.4 V-2.6" stroke="var(--ew-accent,#f5b820)" stroke-width="2.2" stroke-linecap="round"/>
-    <path d="M-3.4 0.6 L0 -3 L3.4 0.6" fill="none" stroke="var(--ew-highlight, #f5f1e8)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M-3.4 0.6 L0 -3 L3.4 0.6" fill="none" stroke="var(--ew-highlight, #8fb89a)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M-5 -5.2 H5" stroke="var(--ew-secondary, #8fb89a)" stroke-width="2" stroke-linecap="round"/></g>
   </g>
 </svg>

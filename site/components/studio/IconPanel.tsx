@@ -57,7 +57,9 @@ export function IconPanel({ icon, onClose }: { icon: StudioIconMeta; onClose: ()
   // Resettable per-instance prop state.
   const [previewSize, setPreviewSize] = useState(120);
   const [plain, setPlain] = useState(false);
-  const [noPetal, setNoPetal] = useState(false);
+  // Default noPetal=true to match the React wrapper default. The signature
+  // mark is a deliberate accent — toggle off in the panel to reveal it.
+  const [noPetal, setNoPetal] = useState(true);
   const [ember, setEmber] = useState(false);
   const [motion, setMotion] = useState("pop");
   const [engineName, setEngineName] = useState("css");
@@ -100,7 +102,7 @@ export function IconPanel({ icon, onClose }: { icon: StudioIconMeta; onClose: ()
       setRepeatDelay("1.6");
     }
     setPlain(false);
-    setNoPetal(false);
+    setNoPetal(true);  // signature off by default — matches React wrapper
     setColors({});
     setSpark("nkonsonkonson");
   }, [icon.name, iconSvg]);
@@ -145,6 +147,14 @@ export function IconPanel({ icon, onClose }: { icon: StudioIconMeta; onClose: ()
     if (ember) el.setAttribute("data-ember", "true");
     else el.removeAttribute("data-ember");
 
+    // Speed + delay flow through CSS vars. icons.css animation rules read
+    // `var(--ew-dur, default)` so this just works for the CSS engine.
+    const svgEl = el as unknown as { style: CSSStyleDeclaration };
+    if (speed) svgEl.style.setProperty("--ew-dur", speed);
+    else svgEl.style.removeProperty("--ew-dur");
+    if (delay) svgEl.style.setProperty("--ew-delay", delay);
+    else svgEl.style.removeProperty("--ew-delay");
+
     // Apply colour overrides to the SVG element ITSELF, not the parent.
     // icons.css has `[data-theme] :where(.ew-icon) { --ew-glyph: ...; }`
     // — those rules set vars directly on the .ew-icon element and beat
@@ -169,7 +179,7 @@ export function IconPanel({ icon, onClose }: { icon: StudioIconMeta; onClose: ()
       el.removeEventListener("mouseenter", onEnter);
       el.removeEventListener("mouseleave", onLeave);
     };
-  }, [previewSvg, engineName, motion, trigger, repeat, repeatDelay, ember, colors]);
+  }, [previewSvg, engineName, motion, trigger, repeat, repeatDelay, ember, colors, speed, delay]);
 
   const snippets: SnippetBundle | null = useMemo(() => {
     if (!iconSvg) return null;

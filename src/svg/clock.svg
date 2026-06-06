@@ -20,6 +20,6 @@
       <path d="M0 0 L0 -3.4" stroke="var(--ew-accent,#f5b820)" stroke-width="1.1" stroke-linecap="round"/>
       <path d="M0 0 L2.6 1" stroke="var(--ew-accent,#f5b820)" stroke-width="1.1" stroke-linecap="round"/>
     </g>
-    <circle cx="0" cy="0" r="0.8" fill="var(--ew-highlight, #f5f1e8)"/></g>
+    <circle cx="0" cy="0" r="0.8" fill="var(--ew-highlight, #8fb89a)"/></g>
   </g>
 </svg>

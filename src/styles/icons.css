@@ -81,7 +81,7 @@
   --ew-glyph:       #3a6b48;   /* toned-down mid forest primary */
   --ew-outline:     #1a3a2a;   /* deeper forest stroke for definition */
   --ew-secondary:   #2a7a4a;   /* mid forest accents */
-  --ew-highlight:   #f5d68c;   /* warm pale gold — pops on the cream page */
+  --ew-highlight:   #8fb89a;   /* warm pale gold — pops on the cream page */
   --ew-glyph-2:     #2a5a3b;
   --ew-spark-light: #ffd47a;
   --ew-rose:        #c0413a;
@@ -97,7 +97,7 @@
   --ew-glyph:       #3a6b48;   /* mid forest, was #1a3a2a — too deep */
   --ew-outline:     #1a3a2a;   /* deep forest only as stroke */
   --ew-secondary:   #2a7a4a;
-  --ew-highlight:   #f5d68c;   /* warm pale gold */
+  --ew-highlight:   #8fb89a;   /* warm pale gold */
   --ew-glyph-2:     #2a5a3b;
   --ew-spark-light: #ffd47a;
   --ew-rose:        #c0413a;
@@ -182,7 +182,7 @@
 }
 :where(.ew-icon):not([data-trigger]):hover .ew-spark,
 :where(.ew-icon[data-play]) .ew-spark {
-  animation: ew-spark 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: ew-spark var(--ew-dur, 0.7s) cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-box: view-box;
   transform-origin: center;
 }
@@ -199,7 +199,7 @@
 }
 :where(.ew-icon):not([data-trigger]):hover .ew-petal-draw,
 :where(.ew-icon[data-play]) .ew-petal-draw {
-  animation: ew-petal-draw 0.9s ease-out forwards;
+  animation: ew-petal-draw var(--ew-dur, 0.9s) ease-out forwards;
 }
 
 /* BLINK — fallback for icons authored with data-motion="blink" when
@@ -242,9 +242,9 @@
   100% { transform: rotate(0); }
 }
 :where(.ew-icon):not([data-trigger]):hover .ew-blade-a,
-:where(.ew-icon[data-play]) .ew-blade-a { animation: ew-snip-a 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+:where(.ew-icon[data-play]) .ew-blade-a { animation: ew-snip-a var(--ew-dur, 0.7s) cubic-bezier(0.34, 1.56, 0.64, 1); }
 :where(.ew-icon):not([data-trigger]):hover .ew-blade-b,
-:where(.ew-icon[data-play]) .ew-blade-b { animation: ew-snip-b 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+:where(.ew-icon[data-play]) .ew-blade-b { animation: ew-snip-b var(--ew-dur, 0.7s) cubic-bezier(0.34, 1.56, 0.64, 1); }
 
 /* TILT — whole icon wobbles */
 @keyframes ew-tilt {
@@ -257,7 +257,7 @@
 }
 :where(.ew-icon[data-motion="tilt"]):not([data-trigger]):hover > g.ew-chrome,
 :where(.ew-icon[data-motion="tilt"][data-play]) > g.ew-chrome {
-  animation: ew-tilt 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: ew-tilt var(--ew-dur, 0.7s) cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-box: view-box; transform-origin: center;
 }
 
@@ -273,7 +273,7 @@
 }
 :where(.ew-icon[data-motion="shake"]):not([data-trigger]):hover .ew-body,
 :where(.ew-icon[data-motion="shake"][data-play]) .ew-body {
-  animation: ew-shake 0.7s ease-in-out;
+  animation: ew-shake var(--ew-dur, 0.7s) ease-in-out;
   transform-box: view-box; transform-origin: 50% 12%;
 }
 
@@ -287,7 +287,7 @@
 }
 :where(.ew-icon):not([data-trigger]):hover .ew-rise,
 :where(.ew-icon[data-play]) .ew-rise {
-  animation: ew-rise 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: ew-rise var(--ew-dur, 0.6s) cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* SWING — pendulum tilt */
@@ -301,7 +301,7 @@
 }
 :where(.ew-icon[data-motion="swing"]):not([data-trigger]):hover .ew-body,
 :where(.ew-icon[data-motion="swing"][data-play]) .ew-body {
-  animation: ew-swing 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: ew-swing var(--ew-dur, 0.7s) cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-box: view-box; transform-origin: 50% 10%;
 }
 
@@ -315,7 +315,7 @@
 }
 :where(.ew-icon[data-motion="pop"]):not([data-trigger]):hover > g.ew-chrome,
 :where(.ew-icon[data-motion="pop"][data-play]) > g.ew-chrome {
-  animation: ew-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: ew-pop var(--ew-dur, 0.55s) cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-box: view-box; transform-origin: center;
 }
 
@@ -327,7 +327,7 @@
 }
 :where(.ew-icon[data-motion="spin"]):not([data-trigger]):hover > g.ew-chrome,
 :where(.ew-icon[data-motion="spin"][data-play]) > g.ew-chrome {
-  animation: ew-spin 0.75s cubic-bezier(0.5, 0, 0.5, 1);
+  animation: ew-spin var(--ew-dur, 0.75s) cubic-bezier(0.5, 0, 0.5, 1);
   transform-box: view-box; transform-origin: center;
 }
 
@@ -345,13 +345,13 @@
   100% { transform: translateY(0); }
 }
 :where(.ew-icon[data-motion="slide-r"]):not([data-trigger]):hover .ew-body,
-:where(.ew-icon[data-motion="slide-r"][data-play]) .ew-body { animation: ew-slide-x 0.55s cubic-bezier(0.34, 1.56, 0.64, 1); }
+:where(.ew-icon[data-motion="slide-r"][data-play]) .ew-body { animation: ew-slide-x var(--ew-dur, 0.55s) cubic-bezier(0.34, 1.56, 0.64, 1); }
 :where(.ew-icon[data-motion="slide-l"]):not([data-trigger]):hover .ew-body,
-:where(.ew-icon[data-motion="slide-l"][data-play]) .ew-body { animation: ew-slide-x 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) reverse; }
+:where(.ew-icon[data-motion="slide-l"][data-play]) .ew-body { animation: ew-slide-x var(--ew-dur, 0.55s) cubic-bezier(0.34, 1.56, 0.64, 1) reverse; }
 :where(.ew-icon[data-motion="slide-u"]):not([data-trigger]):hover .ew-body,
-:where(.ew-icon[data-motion="slide-u"][data-play]) .ew-body { animation: ew-slide-y 0.55s cubic-bezier(0.34, 1.56, 0.64, 1); }
+:where(.ew-icon[data-motion="slide-u"][data-play]) .ew-body { animation: ew-slide-y var(--ew-dur, 0.55s) cubic-bezier(0.34, 1.56, 0.64, 1); }
 :where(.ew-icon[data-motion="slide-d"]):not([data-trigger]):hover .ew-body,
-:where(.ew-icon[data-motion="slide-d"][data-play]) .ew-body { animation: ew-slide-y 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) reverse; }
+:where(.ew-icon[data-motion="slide-d"][data-play]) .ew-body { animation: ew-slide-y var(--ew-dur, 0.55s) cubic-bezier(0.34, 1.56, 0.64, 1) reverse; }
 
 /* DRAW — stroke fills in then rests */
 @keyframes ew-draw {
@@ -362,7 +362,7 @@
 :where(.ew-icon):not([data-trigger]):hover .ew-draw,
 :where(.ew-icon[data-play]) .ew-draw {
   stroke-dasharray: var(--ew-len, 60);
-  animation: ew-draw 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: ew-draw var(--ew-dur, 0.6s) cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 /* PULSE — gentle scale on the spark/accent */
@@ -373,7 +373,7 @@
 }
 :where(.ew-icon[data-motion="pulse"]):not([data-trigger]):hover .ew-spark,
 :where(.ew-icon[data-motion="pulse"][data-play]) .ew-spark {
-  animation: ew-pulse 0.6s ease-in-out;
+  animation: ew-pulse var(--ew-dur, 0.6s) ease-in-out;
   transform-box: view-box; transform-origin: center;
 }
 
@@ -386,7 +386,7 @@
 }
 :where(.ew-icon[data-motion="flip"]):not([data-trigger]):hover > g.ew-chrome,
 :where(.ew-icon[data-motion="flip"][data-play]) > g.ew-chrome {
-  animation: ew-flip 0.7s ease-in-out;
+  animation: ew-flip var(--ew-dur, 0.7s) ease-in-out;
   transform-box: view-box; transform-origin: center;
 }
 
@@ -401,7 +401,7 @@
 :where(.ew-icon):not([data-trigger]):hover .ew-check,
 :where(.ew-icon[data-play]) .ew-check {
   stroke-dasharray: 24;
-  animation: ew-check 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: ew-check var(--ew-dur, 0.6s) cubic-bezier(0.4, 0, 0.2, 1) both;
   transform-box: view-box; transform-origin: center;
 }
 
@@ -451,15 +451,15 @@
 }
 
 :where(.ew-icon):not([data-trigger]):hover .ew-p1,
-:where(.ew-icon[data-play]) .ew-p1 { animation: ew-splash-1 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); }
+:where(.ew-icon[data-play]) .ew-p1 { animation: ew-splash-1 var(--ew-dur, 0.7s) cubic-bezier(0.22, 0.61, 0.36, 1); }
 :where(.ew-icon):not([data-trigger]):hover .ew-p2,
-:where(.ew-icon[data-play]) .ew-p2 { animation: ew-splash-2 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); }
+:where(.ew-icon[data-play]) .ew-p2 { animation: ew-splash-2 var(--ew-dur, 0.7s) cubic-bezier(0.22, 0.61, 0.36, 1); }
 :where(.ew-icon):not([data-trigger]):hover .ew-p3,
-:where(.ew-icon[data-play]) .ew-p3 { animation: ew-splash-3 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); }
+:where(.ew-icon[data-play]) .ew-p3 { animation: ew-splash-3 var(--ew-dur, 0.7s) cubic-bezier(0.22, 0.61, 0.36, 1); }
 :where(.ew-icon):not([data-trigger]):hover .ew-p4,
-:where(.ew-icon[data-play]) .ew-p4 { animation: ew-splash-4 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); }
+:where(.ew-icon[data-play]) .ew-p4 { animation: ew-splash-4 var(--ew-dur, 0.7s) cubic-bezier(0.22, 0.61, 0.36, 1); }
 :where(.ew-icon):not([data-trigger]):hover .ew-p5,
-:where(.ew-icon[data-play]) .ew-p5 { animation: ew-splash-5 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); }
+:where(.ew-icon[data-play]) .ew-p5 { animation: ew-splash-5 var(--ew-dur, 0.7s) cubic-bezier(0.22, 0.61, 0.36, 1); }
 
 /* ─── Runtime knobs — read from CSS variables on the icon or ancestor ── */
 /*
