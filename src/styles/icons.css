@@ -78,11 +78,11 @@
 
 /* DEFAULT / COMPANY (forest paper page bg #f6f4ed). */
 [data-theme="default"] :where(.ew-icon) {
-  --ew-glyph:       #234a31;   /* toned-down mid forest primary */
+  --ew-glyph:       #3a6b48;   /* toned-down mid forest primary */
   --ew-outline:     #1a3a2a;   /* deeper forest stroke for definition */
   --ew-secondary:   #2a7a4a;   /* mid forest accents */
   --ew-highlight:   #f5d68c;   /* warm pale gold — pops on the cream page */
-  --ew-glyph-2:     #1f4530;
+  --ew-glyph-2:     #2a5a3b;
   --ew-spark-light: #ffd47a;
   --ew-rose:        #c0413a;
   --ew-accent:      #d99500;
@@ -94,11 +94,11 @@
 
 /* LIGHT (cream / white page). */
 [data-theme="light"] :where(.ew-icon) {
-  --ew-glyph:       #234a31;   /* mid forest, was #1a3a2a — too deep */
+  --ew-glyph:       #3a6b48;   /* mid forest, was #1a3a2a — too deep */
   --ew-outline:     #1a3a2a;   /* deep forest only as stroke */
   --ew-secondary:   #2a7a4a;
   --ew-highlight:   #f5d68c;   /* warm pale gold */
-  --ew-glyph-2:     #1f4530;
+  --ew-glyph-2:     #2a5a3b;
   --ew-spark-light: #ffd47a;
   --ew-rose:        #c0413a;
   --ew-accent:      #d99500;

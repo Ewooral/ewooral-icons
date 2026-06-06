@@ -145,10 +145,16 @@ export function IconPanel({ icon, onClose }: { icon: StudioIconMeta; onClose: ()
     if (ember) el.setAttribute("data-ember", "true");
     else el.removeAttribute("data-ember");
 
+    // Apply colour overrides to the SVG element ITSELF, not the parent.
+    // icons.css has `[data-theme] :where(.ew-icon) { --ew-glyph: ...; }`
+    // — those rules set vars directly on the .ew-icon element and beat
+    // any value the SVG would otherwise inherit from a parent div. So
+    // putting our overrides on el (the SVG) is the only way to win.
+    const svgStyle = (el as unknown as { style: CSSStyleDeclaration }).style;
     for (const v of COLOR_VARS) {
       const val = colors[v.name];
-      if (val) host.style.setProperty(v.name, val);
-      else host.style.removeProperty(v.name);
+      if (val) svgStyle.setProperty(v.name, val);
+      else svgStyle.removeProperty(v.name);
     }
 
     if (trigger === "hover") {
