@@ -43,7 +43,8 @@
     "./manifest.json": "./dist/manifest.json"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "pnpm -C site dev",
+    "dev:vite": "vite",
     "build": "node scripts/generate.mjs && tsc -p tsconfig.build.json",
     "build:react": "node scripts/generate.mjs",
     "build:png": "node scripts/generate-png.mjs",
@@ -76,6 +77,7 @@
     "bfam"
   ],
   "dependencies": {
+    "@ewooral/icons": "file:/home/ewooral/personal/ewooral-icons/ewooral-icons-0.3.7.tgz",
     "gsap": "^3.15.0",
     "motion": "^12.40.0"
   }
