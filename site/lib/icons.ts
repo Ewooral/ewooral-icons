@@ -48,3 +48,12 @@ export function loadIcons(): IconRecord[] {
 export function loadIcon(name: string): IconRecord | undefined {
   return loadIcons().find((i) => i.name === name);
 }
+
+/** Same shape as IconRecord minus the raw `svg` field. Use this whenever
+ *  the consumer is a Client Component — keeps the serialized payload to a
+ *  few KB instead of inlining ~500 KB of SVG content into every page. */
+export type IconMeta = Omit<IconRecord, "svg">;
+
+export function loadIconMeta(): IconMeta[] {
+  return loadIcons().map(({ svg: _svg, ...meta }) => meta);
+}

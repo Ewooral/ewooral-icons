@@ -43,8 +43,8 @@
     "./manifest.json": "./dist/manifest.json"
   },
   "scripts": {
-    "dev": "vite",
-    "dev:site": "pnpm -C site dev",
+    "dev": "pnpm -C site dev",
+    "dev:vite": "vite",
     "build": "node scripts/generate.mjs && tsc -p tsconfig.build.json",
     "build:react": "node scripts/generate.mjs",
     "build:png": "node scripts/generate-png.mjs",

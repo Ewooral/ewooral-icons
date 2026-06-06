@@ -7,9 +7,10 @@
   "packageManager": "pnpm@10.14.0",
   "scripts": {
     "sync:css": "cp ../src/styles/icons.css ./_icons-css.css",
-    "predev": "pnpm sync:css",
-    "prebuild": "pnpm sync:css",
-    "dev": "next dev --turbopack -p 3010",
+    "sync:svg": "node scripts/sync-svg.mjs",
+    "predev": "pnpm sync:css && pnpm sync:svg",
+    "prebuild": "pnpm sync:css && pnpm sync:svg",
+    "dev": "next dev -p 3010",
     "build": "next build",
     "start": "next start -p 3010",
     "lint": "next lint",
