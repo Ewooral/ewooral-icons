@@ -42,6 +42,12 @@
   cursor: pointer;
   overflow: visible;
   flex-shrink: 0;
+  /* Drives the dashed medallion ring (it's stroked with currentColor at
+   * 45% opacity). Without this, the ring inherits the page text colour —
+   * which on a cream-with-gold-icons layout is essentially invisible.
+   * Per-theme overrides below tune it to the brand secondary so the frame
+   * always reads. */
+  color: var(--ew-secondary, #8fb89a);
 }
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -64,36 +70,52 @@
  *  Consumers can still override any --ew-* themselves; these only
  *  apply when the consuming page is tagged with data-theme.
  * ──────────────────────────────────────────────────────────────────── */
-[data-theme="light"] :where(.ew-icon) {
-  --ew-glyph:       #1a3a2a;   /* brand forest primary */
-  --ew-outline:     #0f2017;
-  --ew-secondary:   #2a7a4a;   /* mid forest for accents */
-  --ew-highlight:   #f5d68c;   /* warm pale gold — readable on white, not green */
-  --ew-glyph-2:     #142a1e;
-  --ew-spark-light: #ffd47a;   /* deeper gold for inner sparks */
+/* Tone-down note:
+ * Brand deep forest #1a3a2a was reading too heavy on every theme bg.
+ * Lifted the glyph to #234a31 (mid forest) across all themes; the deeper
+ * #1a3a2a is now reserved for OUTLINE only — it still ships brand-green
+ * definition without dominating the fill. */
+
+/* DEFAULT / COMPANY (forest paper page bg #f6f4ed). */
+[data-theme="default"] :where(.ew-icon) {
+  --ew-glyph:       #234a31;   /* toned-down mid forest primary */
+  --ew-outline:     #1a3a2a;   /* deeper forest stroke for definition */
+  --ew-secondary:   #2a7a4a;   /* mid forest accents */
+  --ew-highlight:   #f5d68c;   /* warm pale gold — pops on the cream page */
+  --ew-glyph-2:     #1f4530;
+  --ew-spark-light: #ffd47a;
   --ew-rose:        #c0413a;
   --ew-accent:      #d99500;
   --ew-accent-deep: #b97f00;
   --ew-signature:   #d99500;
-  --ew-bg:          rgba(26,58,42,0.08);
+  --ew-bg:          rgba(35,74,49,0.08);
   --ew-bg-opacity:  1;
 }
 
+/* LIGHT (cream / white page). */
+[data-theme="light"] :where(.ew-icon) {
+  --ew-glyph:       #234a31;   /* mid forest, was #1a3a2a — too deep */
+  --ew-outline:     #1a3a2a;   /* deep forest only as stroke */
+  --ew-secondary:   #2a7a4a;
+  --ew-highlight:   #f5d68c;   /* warm pale gold */
+  --ew-glyph-2:     #1f4530;
+  --ew-spark-light: #ffd47a;
+  --ew-rose:        #c0413a;
+  --ew-accent:      #d99500;
+  --ew-accent-deep: #b97f00;
+  --ew-signature:   #d99500;
+  --ew-bg:          rgba(35,74,49,0.08);
+  --ew-bg-opacity:  1;
+}
+
+/* DARK (near-black page) — fills stay light so the icon reads on dark;
+ * deep forest only appears as outline / stroke. */
 [data-theme="dark"] :where(.ew-icon) {
-  /* All FILL surfaces stay light so the icon reads on a dark page:
-   *   glyph     = near-white primary
-   *   highlight = pale sage — used as body fill by cloud, eye eyelid,
-   *               mail flap, gift wrap; can't be dark or those icons
-   *               disappear at night.
-   *   secondary = mid sage — accent green (info-circle outer etc).
-   * Deep forest only appears as OUTLINE / STROKE around shapes — that
-   * draws the brand-green definition without filling any large area
-   * with the bg-matching colour. */
   --ew-glyph:       #f5f1e8;   /* near-white primary fill */
-  --ew-outline:     #1a3a2a;   /* deep forest stroke — outline around shapes */
+  --ew-outline:     #234a31;   /* toned-down forest stroke */
   --ew-secondary:   #8fb89a;   /* mid sage (info-circle outer etc) */
-  --ew-highlight:   #cce6d4;   /* pale sage — body fill for cloud / eye / mail */
-  --ew-glyph-2:     #d4cec0;   /* slightly darker cream for layered fills */
+  --ew-highlight:   #cce6d4;   /* pale sage — cloud / eye eyelid / mail */
+  --ew-glyph-2:     #d4cec0;   /* slightly darker cream */
   --ew-spark-light: #fff3cf;
   --ew-rose:        #e8a3a3;
   --ew-accent:      #f5b820;   /* brand gold accent */
@@ -102,6 +124,13 @@
   --ew-bg:          rgba(245,241,232,0.04);
   --ew-bg-opacity:  1;
 }
+
+/* Signature mark hidden by default — opt in by setting `noPetal={false}`
+ * on the React wrapper (or removing `data-no-petal=""` in vanilla / Vue
+ * / etc). The Akan brand marks are a deliberate accent; most consumers
+ * don't want them on every icon. */
+:where(.ew-icon) .ew-signature { display: none; }
+:where(.ew-icon[data-signature]) .ew-signature { display: block; }
 
 /* Anchor .ew-body via the CSS independent `translate` property instead of
    the SVG `transform="translate(12 12.4)"` attribute (which is REMOVED

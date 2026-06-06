@@ -123,7 +123,9 @@ export type IconProps = Omit<React.SVGAttributes<SVGSVGElement>, "color"> & {
   /** Stroke / outline colour around shapes — drives --ew-outline.
    *  Default deep forest #1a3a2a in dark theme, darker forest in light. */
   outline?: string;
-  /** Hide the gold petal-ribbon (backdrop + ring stay). */
+  /** Hide the Akan signature mark + splash at the top-right. The mark is
+   *  a deliberate brand accent, off by default — set noPetal={false} on
+   *  individual icons where you want the mark to show. */
   noPetal?: boolean;
   /** Strip the medallion chrome — glyph only. */
   plain?: boolean;
@@ -167,7 +169,7 @@ const ${pascal} = React.forwardRef<EWIconHandle, IconProps>(function ${pascal}(
     size = 24,
     className,
     color, accent, bg, highlight, secondary, outline,
-    noPetal, plain,
+    noPetal = true, plain,
     motion = "play",
     speed, delay,
     trigger = "hover",
