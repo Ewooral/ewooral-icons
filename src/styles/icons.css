@@ -80,7 +80,7 @@
 [data-theme="default"] :where(.ew-icon) {
   --ew-glyph:       #3a6b48;   /* toned-down mid forest primary */
   --ew-outline:     #1a3a2a;   /* deeper forest stroke for definition */
-  --ew-secondary:   #2a7a4a;   /* mid forest accents */
+  --ew-secondary:   #8fb89a;
   --ew-highlight:   #8fb89a;   /* warm pale gold — pops on the cream page */
   --ew-glyph-2:     #2a5a3b;
   --ew-spark-light: #ffd47a;
@@ -96,7 +96,7 @@
 [data-theme="light"] :where(.ew-icon) {
   --ew-glyph:       #3a6b48;   /* mid forest, was #1a3a2a — too deep */
   --ew-outline:     #1a3a2a;   /* deep forest only as stroke */
-  --ew-secondary:   #2a7a4a;
+  --ew-secondary:   #8fb89a;
   --ew-highlight:   #8fb89a;   /* warm pale gold */
   --ew-glyph-2:     #2a5a3b;
   --ew-spark-light: #ffd47a;
