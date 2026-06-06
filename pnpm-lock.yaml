@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@ewooral/icons':
+        specifier: file:/home/ewooral/personal/ewooral-icons/ewooral-icons-0.3.7.tgz
+        version: file:../ewooral-icons/ewooral-icons-0.3.7.tgz(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       gsap:
         specifier: ^3.15.0
         version: 3.15.0
@@ -283,6 +286,15 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@ewooral/icons@file:../ewooral-icons/ewooral-icons-0.3.7.tgz':
+    resolution: {integrity: sha512-jLP9WnxWZ1nhpEZBf7uSrrYxrT8NJ1dRbSJjNbhwoZB2+YT/1YfLq6LlwGiq2UgUlhuOL4pBbkjzUvdE7g+KJw==, tarball: file:../ewooral-icons/ewooral-icons-0.3.7.tgz}
+    version: 0.3.7
+    peerDependencies:
+      react: '>=18'
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -1028,6 +1040,16 @@ snapshots:
 
   '@esbuild/win32-x64@0.27.7':
     optional: true
+
+  '@ewooral/icons@file:../ewooral-icons/ewooral-icons-0.3.7.tgz(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+    dependencies:
+      gsap: 3.15.0
+      motion: 12.40.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+    optionalDependencies:
+      react: 19.2.6
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
+      - react-dom
 
   '@img/colour@1.1.0': {}
 

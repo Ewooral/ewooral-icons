@@ -1,6 +1,6 @@
 {
   "name": "@ewooral/icons",
-  "version": "0.3.7",
+  "version": "0.4.0",
   "description": "Ewooral & BFAM Holdings — distinctive medallion-style icon set with cartoonish hover splash. 234 icons. Pluggable motion engines (CSS, GSAP, Motion). React + vanilla helper for any framework. Configurable trigger (hover/click/focus/mount/viewport/manual).",
   "license": "MIT",
   "author": "Ewooral & BFAM Holdings <hello@ewooral.com>",
@@ -44,7 +44,6 @@
   },
   "scripts": {
     "dev": "pnpm -C site dev",
-    "dev:vite": "vite",
     "build": "node scripts/generate.mjs && tsc -p tsconfig.build.json",
     "build:react": "node scripts/generate.mjs",
     "build:png": "node scripts/generate-png.mjs",
